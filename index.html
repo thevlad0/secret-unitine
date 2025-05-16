@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+    <title>Secret Unitine</title>
+    <meta charset="UTF-8" />
+    <link href="./css/style.css" rel="stylesheet" />
+    <script src="./javascript/new-message.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <div id="header-part">
+            <!--<img id="secret-unitine-logo" src="./img/" alt="Secret Unitine logo">-->
+            <h1>Secret Unitine</h1>
+        </div>
+    </header>
+    <main>
+        <section>
+            <div id="create-message">
+                <h2>
+                    <img id="pencil-icon" class="icons" src="./img/pencil.png" alt="Pencil icon" />
+                    Ново съобщение
+                </h2>
+            </div>
+            <div>
+                <h2>
+                    <img id="inbox-icon" class="icons" src="./img/inbox.png" alt="Inbox icon" />
+                    Входяща поща
+                </h2>
+                <h2>
+                    <img id="sent-icon" class="icons" src="./img/sent.png" alt="Sent icon" />
+                    Изпратени
+                </h2>
+                <h2>
+                    <img id="star-icon" class="icons" src="./img/star.png" alt="Star icon" />
+                    Със звезда
+                </h2>
+                <h2>
+                    <img id="bin-icon" class="icons" src="./img/bin.png" alt="Bin icon" />
+                    Изтрити
+                </h2>
+                <!--Drafts??-->
+            </div>
+        </section>
+
+        <section>
+            <div id="new-message" style="display: none;">
+                <form id="new-message-form">
+                    <div>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td id="new-message-title">
+                                        <h2>Ново съобщение</h2>
+                                    </td>
+                                    <td><img id="minimize-icon" class="new-message-nav-icons" src="./img/minimize.png"
+                                            alt="Minimize icon" title="Намаляване" /></td>
+                                    <td><img id="cancel-icon" class="new-message-nav-icons" src="./img/cancel.png"
+                                            alt="Cancel icon" title="Затваряне БЕЗ запазване" /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <input type="text" id="receivers" name="receivers" class="message-header"
+                            placeholder="Получатели" />
+                    </div>
+                    <div>
+                        <input type="text" id="topic" name="topic" class="message-header" placeholder="Тема" />
+                    </div>
+                    <div>
+                        <textarea id="message-content" name="message_content" rows="15" cols="50"></textarea>
+                    </div>
+                    <div>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td><input type="submit" id="send-message-button" value="Изпращане" /></td>
+                                    <td><img id="attach-files-icon" class="icons" src="./img/attach-files.png"
+                                            alt="attach-files icon" /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
