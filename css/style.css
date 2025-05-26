@@ -1,0 +1,37 @@
+#create-message {
+    border-radius: 16px;
+    background-color: lightblue;
+    width: 16%;
+    height: 8%;
+    cursor: pointer;
+}
+
+#new-message{
+    float:right;
+    border: 2px solid black;
+    padding-bottom: 0px;
+   /* display: none;*/
+}
+
+.message-header {
+    width: 98%;
+}
+
+#new-message-title {
+    padding-right: 160px;
+}
+
+.new-message-nav-icons{
+    padding-right: 16px;
+    cursor: pointer;
+}
+
+#send-message-button {
+    border-radius: 16px;
+    background-color:cornflowerblue;
+    color: white;
+}
+
+#attach-files-icon {
+    padding-left: 16px;
+}
