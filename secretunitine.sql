@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Време на генериране: 21 май 2025 в 17:14
+-- Време на генериране: 26 май 2025 в 09:15
 -- Версия на сървъра: 10.4.32-MariaDB
 -- Версия на PHP: 8.0.30
 
@@ -40,13 +40,25 @@ CREATE TABLE `roles` (
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
+  `fn` varchar(10) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
   `username` varchar(20) NOT NULL,
   `name` varchar(10) NOT NULL,
   `surname` varchar(10) NOT NULL,
-  `roleId` int(11) NOT NULL
+  `role` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Схема на данните от таблица `users`
+--
+
+INSERT INTO `users` (`id`, `fn`, `email`, `password`, `username`, `name`, `surname`, `role`) VALUES
+(0, '', 'hrisi.hf@gmail.com', '$2y$10$M.XGXGHIJKaKi25OIy0dlOKJAi/yLtgYlK.P3929Mwn', 'hfrangova', 'Hrisi', 'Vasileva', 'REGLAR_USER'),
+(2, '', 'stefka@gmail.com', '$2y$10$ETm7QdgA6CMy3oBGSOOQhOT4ayyKEAeyicbpf4CQthE', 'stefka', 'Stefka', 'Lyaskaliev', 'student'),
+(3, '', 'iliyana@gmail.com', '$2y$10$75AwRxkA3N2DcTr53yfYXO5NqY2/G1LxoWqxpLjt5Vg', 'iliyana', 'Iliyana', 'Frangova', 'student'),
+(4, '', 'vladi@gmail.com', '$2y$10$PqUkGeREkuBqG.q5MyFvgeBJrjUDBHw7kRmJMsPJ8iF', 'vlado', 'Vladi', 'NeZnam', 'teacher'),
+(5, '', 'newUser@gmail.com', '$2y$10$Z6D2CT4jGvWJnyJm0VFNyefS99G6nmhaCqjUyPdh/E4', 'newUser', 'NewUserNam', 'NewUserSur', 'teacher');
 
 --
 -- Indexes for dumped tables
@@ -63,18 +75,7 @@ ALTER TABLE `roles`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `username` (`username`),
-  ADD KEY `roleId` (`roleId`);
-
---
--- Ограничения за дъмпнати таблици
---
-
---
--- Ограничения за таблица `users`
---
-ALTER TABLE `users`
-  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`roleId`) REFERENCES `roles` (`id`);
+  ADD UNIQUE KEY `username` (`username`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
