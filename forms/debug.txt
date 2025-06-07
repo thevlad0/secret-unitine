@@ -1,0 +1,12 @@
+Input password: newUser14
+Stored hash: $2y$10$Z6D2CT4jGvWJnyJm0VFNyefS99G6nmhaCqjUyPdh/E4
+Valid? no
+User data: {"email":"newUser@gmail.com","password":"newUser14"}
+Input password: newUser14
+Stored hash: $2y$10$Z6D2CT4jGvWJnyJm0VFNyefS99G6nmhaCqjUyPdh/E4
+Valid? no
+User from db: {"id":"5","fn":"","email":"newUser@gmail.com","password":"$2y$10$Z6D2CT4jGvWJnyJm0VFNyefS99G6nmhaCqjUyPdh\/E4","username":"newUser","name":"NewUserNam","surname":"NewUserSur","role":"teacher"}
+Input password: newUser14
+Stored hash: $2y$10$Z6D2CT4jGvWJnyJm0VFNyefS99G6nmhaCqjUyPdh/E4
+Valid? no
+$2y$10$Uvz9OJ1JD3nolYxC8L/7veiJOBrMK8sOxEw7UBWf04pLJo0/3Pox6DB password: $2y$10$Z6D2CT4jGvWJnyJm0VFNyefS99G6nmhaCqjUyPdh/E4$2y$10$qowtcedmUO0zQSpfDjjP8ulMrTIq1MA9S7sXqOdW5D2kIft98nNhmDB password: $2y$10$Z6D2CT4jGvWJnyJm0VFNyefS99G6nmhaCqjUyPdh/E4
