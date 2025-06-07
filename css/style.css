@@ -14,7 +14,7 @@
 }
 
 .message-header {
-    width: 98%;
+    width: 95%;
 }
 
 #new-message-title {
@@ -34,4 +34,8 @@
 
 #attach-files-icon {
     padding-left: 16px;
+}
+
+#message-content {
+    resize: none;
 }
