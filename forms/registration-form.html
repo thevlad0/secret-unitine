@@ -1,0 +1,42 @@
+<html> 
+    <meta charset="UTF-8">
+    <head> 
+        <title>Registration form</title> 
+        <link rel="stylesheet"  href="registration.css">
+        <script src="register.js" defer></script>
+    </head>
+    <body> 
+        <form id="register-form">
+            <label class="input-label" for="username"> Потребителско име </label>
+            <input class="input-field" type="text" id="username" placeholder="Въведете потребителско име" required>
+
+            <label class="input-label" for="name"> Име </label>
+            <input class="input-field" type="text" id="name" placeholder="Въведете име" required>
+
+            <label class="input-label" for="family-name"> Фамилия </label>
+            <input class="input-field" type="text" id="family-name" placeholder="Въведете фамилия" required>
+
+            <label class="input-label" for="email"> Имейл </label>
+            <input class="input-field" type="email" id="email" inputmode="email" placeholder="Въведете имейл" required>
+
+            <label class="input-label" for="password"> Парола </label>
+            <input class="input-field" type="password" id="password" placeholder="Въведете парола" required>
+ 
+            <label class="input-label" for="roles">Роля:</label>
+
+            <select name="roleList" id="roles">
+                <option value="teacher">Преподавател</option>
+                <option value="student">Студент</option>                 
+                 <!--Admin should be registered manually-->
+            </select>
+            
+            <section id="fn-input-section">
+                 <label class="input-label" for="fn"> Факултетен номер </label>
+                <input class="input-field" id="fn-field" type="text" id="fn"  placeholder="Въведете ФН"  value="">
+            </section>
+
+            <button type="submit" id="register-btn"> Регистрация </button> <!--sumbit ili ne da e tiput na button-a ne razbrah???-->              
+        </form>
+         <label class="input-label" id="response-label"> </label>
+    </body>
+</html>

@@ -6,43 +6,67 @@
     <meta charset="UTF-8" />
     <link href="./css/style.css" rel="stylesheet" />
     <script src="./javascript/new-message.js" defer></script>
+     <script src="./javascript/load-user-inbox.js" defer></script>
+    <script src="./javascript/open-message.js" defer></script>
 </head>
 
-<body>
+<body id="page-body">
     <header>
         <div id="header-part">
             <!--<img id="secret-unitine-logo" src="./img/" alt="Secret Unitine logo">-->
             <h1>Secret Unitine</h1>
         </div>
     </header>
-    <main>
-        <section>
-            <div id="create-message">
-                <h2>
+
+    <main id = "main-page">
+        <section id = "menu-section">
+            <div id="menu-div">
+                <h2 id = "create-message" class="menu-option">
                     <img id="pencil-icon" class="icons" src="./img/pencil.png" alt="Pencil icon" />
                     Ново съобщение
-                </h2>
-            </div>
-            <div>
-                <h2>
+                </h2>            
+                <h2 id = "inbox" class="menu-option">
                     <img id="inbox-icon" class="icons" src="./img/inbox.png" alt="Inbox icon" />
                     Входяща поща
                 </h2>
-                <h2>
+                <h2 id = "inbox" class="menu-option">
                     <img id="sent-icon" class="icons" src="./img/sent.png" alt="Sent icon" />
                     Изпратени
                 </h2>
-                <h2>
+                <h2 id = "inbox" class="menu-option">
                     <img id="star-icon" class="icons" src="./img/star.png" alt="Star icon" />
                     Със звезда
                 </h2>
-                <h2>
+                <h2 id = "inbox" class="menu-option">
                     <img id="bin-icon" class="icons" src="./img/bin.png" alt="Bin icon" />
                     Изтрити
                 </h2>
                 <!--Drafts??-->
             </div>
         </section>
+              
+    <section id="messages-table-section"> 
+             <table id="message-table">
+                <tbody id="messages-table-body">
+                    <tr class="message-row">                       
+                        <td class="message-cell">
+                        <h4>
+                            <img id="star-icon" class="icons" src="./img/star.png" alt="Star icon" />                                                
+                            Примерно съобщение
+                            
+                        </h4>   <!--when clicking on, a sample message page opens-->
+                        </td>   
+                        
+                        <td class="bin-cell"> 
+                            <img id="bin-icon" class="icons" src="./img/bin.png" alt="Bin icon" />   
+                        </td>
+                    </tr> 
+                    
+                    <!--page for adding new roles corresponding to messages-->
+                </tbody>
+             </table>
+        
+
 
         <section>
             <div id="new-message" style="display: none;">
@@ -90,6 +114,8 @@
                 </form>
             </div>
         </section>
+
+      </section>
     </main>
 </body>
 
