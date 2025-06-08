@@ -1,8 +1,16 @@
+#header-part {
+    padding-left: 4%;
+}
+
+body {
+    background-color:  #A7C7E7;
+    height: 100vh;
+}
+
+
 #create-message {
     border-radius: 16px;
     background-color: lightblue;
-    width: 16%;
-    height: 8%;
     cursor: pointer;
 }
 
@@ -11,6 +19,11 @@
     border: 2px solid black;
     padding-bottom: 0px;
    /* display: none;*/
+
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+    background-color: #FFFFF0;
 }
 
 .message-header {
@@ -34,4 +47,53 @@
 
 #attach-files-icon {
     padding-left: 16px;
+}
+
+#main-page {
+    display: flex;    
+    height: 90%;
+    background-color: #FFFFF0;
+    border-radius: 10px;
+}
+
+#menu-section {
+    width: 20%;
+    background-color: #F9F6EE;
+    border-radius: 10px;
+}
+
+#messages-table-section {
+    width: 80%;
+}
+
+.menu-option:hover {
+    background-color: lightblue;
+    cursor: pointer;
+}
+
+#menu-div {
+    padding-left: 40px;
+}
+
+
+#message-table {
+    padding-left: 5%;
+    width: 80%;    
+}
+
+.message-cell{   
+    width: 100%; 
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    border-color: #C8C8C8;
+}
+
+.message-cell:hover{
+   cursor: pointer;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.bin-cell {
+    text-align: right;
+    width: 1%;
 }

@@ -18,3 +18,4 @@ cancelIcon.addEventListener('click', () => {
     const newMessage = document.getElementById('new-message');
     newMessage.style.display = 'none';
 });
+
