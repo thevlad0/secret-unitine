@@ -27,7 +27,7 @@ body {
 }
 
 .message-header {
-    width: 98%;
+    width: 95%;
 }
 
 #new-message-title {
@@ -96,4 +96,7 @@ body {
 .bin-cell {
     text-align: right;
     width: 1%;
+
+#message-content {
+    resize: none;
 }
