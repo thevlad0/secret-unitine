@@ -8,10 +8,8 @@ class Message {
     private $chainNumber;
     private $isAnonymous;
 
-    public function __construct($id, $senderId, $topic, $content, $isAnonymous) {
-        $this->id = $id;           //???????
+    public function __construct($senderId, $topic, $content, $isAnonymous) {
         $this->senderId = $senderId;
-
         $this->sentAt = date('Y-m-d H:i:s');    //current time
         $this->topic = $topic;
         $this->content = $content;
@@ -20,7 +18,7 @@ class Message {
         $this->chainNumber = 0;
     }
 
-    public setChainNumber(int newValue){
+    public function setChainNumber(int $newValue) {
         if (newValue > 0) {
             $this->chainNumber = newValue;
         } else {
@@ -28,8 +26,12 @@ class Message {
         }
     }
 
+     public function setId(int $newValue) {
+        $this->id = $newValue;
+    }
+
     public function getId() {
-        return $this->isId;
+        return $this->id;
     }
 
     public function getIsAnonymous() {

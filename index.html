@@ -71,7 +71,7 @@
         <section>
             <div id="new-message" style="display: none;">
                 <form id="new-message-form">
-                    <div>
+                    <div id="new-message-form-header">
                         <table>
                             <tbody>
                                 <tr>
@@ -86,26 +86,30 @@
                             </tbody>
                         </table>
                     </div>
-                    <div>
-                        <input type="text" id="receivers" name="receivers" class="message-header"
-                            placeholder="Получатели" />
-                    </div>
-                    <div>
-                        <input type="text" id="topic" name="topic" class="message-header" placeholder="Тема" />
-                    </div>
-                    <div>
-                        <textarea id="message-content" name="message_content" rows="15" cols="50"></textarea>
-                    </div>
-                    <div>
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <td><input type="submit" id="send-message-button" value="Изпращане" /></td>
-                                    <td><img id="attach-files-icon" class="icons" src="./img/attach-files.png"
-                                            alt="attach-files icon" /></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div id="new-message-form-body">
+                        <div>
+                            <input type="text" id="receivers" name="receivers" class="message-header"
+                                placeholder="Получатели" />
+                        </div>
+                        <div>
+                            <input type="text" id="topic" name="topic" class="message-header" placeholder="Тема" />
+                        </div>
+                        <div>
+                            <textarea id="message-content" name="message_content" rows="15" cols="50"></textarea>
+                        </div>
+                        <div>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="submit" id="send-message-button" value="Изпращане"></td>
+                                        <td><input type="checkbox" id="anonymous-message-check"
+                                                name="anonymous-message-check" value="Anonimity" />
+                                            <label for="anonymous-message-check">Анонимно съобщение</label>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </form>
             </div>
