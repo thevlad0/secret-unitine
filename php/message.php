@@ -64,7 +64,7 @@ class Message {
     public function jsonSerialize() {
         return [
             'id' => $this->id,
-            'senderId' => $this->senderId,
+            'senderId' => $this->senderId,            
             'sentAt' => $this->sentAt,
             'topic' => $this->topic,
             'content' => $this->content,

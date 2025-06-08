@@ -24,7 +24,22 @@
            $this->db = new DB();
         }
 
-        
+        //newly added function; needed in load-user-inbox.php and js
+        public function getUserById($userId) {
+            $sqlQuery = "SELECT * FROM users WHERE id = ?";
+            $connection = $this->db->getConnection();
+           
+            $statement = $connection->prepare($sqlQuery);
+            $statement->execute($userId);
+
+            if ($statement->rowCount() === 1) {
+                $user = $statement->fetchAll(PDO::FETCH_ASSOC)[0];
+                return $user;
+            } else {
+                return null;
+            }                
+        }
+
        function validateUserData($userData) {
         if (!$userData || !isset($userData["username"]) ||
             !isset($userData["email"]) || !isset($userData["password"])) {
