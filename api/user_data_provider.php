@@ -34,12 +34,12 @@
 
     if (!empty($userData)) {
         echo json_encode([
-            "success" => true,
+            "status" => "success",
             "data" => $userData
         ], JSON_UNESCAPED_UNICODE);
     } else {
         echo json_encode([
-            "success" => false,
+            "success" => "error",
             "message" => "Потребителят не е намерен."
         ], JSON_UNESCAPED_UNICODE);
     }

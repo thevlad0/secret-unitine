@@ -1,26 +1,30 @@
 <?php
-    session_start();
+    if(session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    require_once __DIR__ . '/../AuthenticationController.php';
 
     $error = '';
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+        $username = $_POST['username'];
         $password = $_POST['password'];
 
-        if ($email && $password) {
+        if ($username && $password) {
             $authController = new AuthenticationController();
 
-            $result = $authController->login($email, $password);
+            $result = $authController->login($username, $password);
 
             if ($result['status'] === 'success') {
                 $_SESSION['user'] = $result['user'];
-                header("Location: inbox");
+                header("Location: /inbox");
                 exit();
             } else {
                 $error = $result['message'];
             }
         }
-    }
+    } 
 ?>
 
 <html> 
@@ -30,12 +34,12 @@
         <link rel="stylesheet" href="css/styles.css">
     </head>
     <body> 
-        <form id="login-form">      
-            <label class="input-label" for="email">Имейл:</label>
-            <input class="input-field" type="email" id="email" inputmode="email" placeholder="Въведете имейл" required>
+        <form id="login-form" action="" method="POST">      
+            <label class="input-label" for="username">Имейл:</label>
+            <input class="input-field" type="text" name="username" placeholder="Въведете имейл" required>
 
             <label class="input-label" for="password">Парола:</label>
-            <input class="input-field" type="password" id="password" placeholder="Въведете парола" required>
+            <input class="input-field" type="password" name="password" placeholder="Въведете парола" required>
 
             <?php
                 if (!empty($error)) {
@@ -43,10 +47,11 @@
                 }
             ?>
             
-            <button class="button" type="submit" id="login-btn">Вход</button>    
-   
-            <label class="input-label" id="register-label" for="register-btn">Нямаш профил?</label>
-            <а id="register-btn">Регистрирай се тук!</а>
+            <button class="button" type="submit" id="login-btn">Вход</button> 
+
+            <a id="forgotten-password" href="#/forgotten-password">Забравена парола?</a>
+            <p class="label" id="register-label" for="register-link">Нямаш профил?</п>
+            <a id="register-link" href="#/register">Регистрирай се тук!</a>
         </form>
     </body>
 </html>

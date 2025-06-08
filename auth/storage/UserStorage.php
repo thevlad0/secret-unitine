@@ -1,4 +1,9 @@
 <?php
+    require_once __DIR__ . '/../../storage/Storage.php';
+    require_once __DIR__ . '/../../storage/db.php';
+    
+    require_once __DIR__ . '/../models/User.php';
+
     class UserStorage implements Storage {
         private $conn;
 
@@ -22,10 +27,11 @@
                 $users[] = new User(
                     $user_data['fn'],
                     $user_data['email'],
+                    $user_data['recoveryEmail'],
                     $user_data['password'],
                     $user_data['username'],
                     $user_data['name'],
-                    $user_data['surname'],
+                    $user_data['lastname'],
                     $user_data['role']
                 );
             }
@@ -47,24 +53,35 @@
             return new User(
                 $user_data['fn'],
                 $user_data['email'],
+                $user_data['recoveryEmail'],
                 $user_data['password'],
                 $user_data['username'],
                 $user_data['name'],
-                $user_data['surname'],
+                $user_data['lastname'],
                 $user_data['role']
             );
         }
 
         public function add($user) {
-            $stmt = $this->conn->prepare("INSERT INTO users (fn, email, password, username, name, surname, role) VALUES (:fn, :email, :password, :username, :name, :surname, :role)");
+            $stmt = $this->conn->prepare("INSERT INTO users (fn, email, recoveryEmail, password, username, name, surname, role) VALUES (:fn, :email, :recoveryEmail, :password, :username, :name, :surname, :role)");
             
-            $stmt->bindParam(':fn', $user->fn());
-            $stmt->bindParam(':email', $user->email());
-            $stmt->bindParam(':password', $user->password());
-            $stmt->bindParam(':username', $user->username());
-            $stmt->bindParam(':name', $$user->name());
-            $stmt->bindParam(':surname', $$user->surname());
-            $stmt->bindParam(':role', $$user->role());
+            $fn = $user->fn();
+            $email = $user->email();
+            $recoveryEmail = $user->recoveryEmail();
+            $password = $user->password();
+            $username = $user->username();
+            $name = $user->name();
+            $surname = $user->lastname();
+            $role = $user->role();
+            
+            $stmt->bindParam(':fn', $fn);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':recoveryEmail', $recoveryEmail);
+            $stmt->bindParam(':password', $password);
+            $stmt->bindParam(':username', $username);
+            $stmt->bindParam(':name', $name);
+            $stmt->bindParam(':surname', $surname);
+            $stmt->bindParam(':role', $role);
             
             return $stmt->execute();
         }

@@ -1,10 +1,14 @@
 <?php
-    session_start();
+    if(session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    require_once __DIR__ . '/../AuthenticationController.php';
 
     $errors = [];
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
+        $username = $_POST['username'];
         $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
         $password = $_POST['password'];
         $confirmPassword = $_POST['confirm-password'];
@@ -16,10 +20,11 @@
 
             if ($result['status'] === 'success') {
                 $_SESSION['user'] = $result['user'];
-                header("Location: inbox");
+                header("Location: /inbox");
                 exit();
             } else {
                 $errors = $result['message'];
+                echo $result['message'];
             }
         }
     }
@@ -32,18 +37,18 @@
         <link rel="stylesheet"  href="registration.css">
     </head>
     <body> 
-        <form id="register-form">
+        <form id="register-form" action="" method="POST">
             <label class="input-label" for="username">Потребителско име:</label>
-            <input class="input-field" type="text" id="username" placeholder="Въведете потребителско име" required>
+            <input class="input-field" type="text" name="username" placeholder="Въведете потребителско име" required>
 
             <label class="input-label" for="email">Имейл:</label>
-            <input class="input-field" type="email" id="email" inputmode="email" placeholder="Въведете имейл" required>
+            <input class="input-field" type="email" name="email" inputmode="email" placeholder="Въведете имейл" required>
 
             <label class="input-label" for="password">Парола:</label>
-            <input class="input-field" type="password" id="password" placeholder="Въведете парола" required>
+            <input class="input-field" type="password" name="password" placeholder="Въведете парола" required>
             
             <label class="input-label" for="confirm-password">Потвърди паролата:</label>
-            <input class="input-field" type="password" id="confirm-password" placeholder="Потвърдете паролата" required>
+            <input class="input-field" type="password" name="confirm-password" placeholder="Потвърдете паролата" required>
 
             <?php
                 if (!empty($errors)) {

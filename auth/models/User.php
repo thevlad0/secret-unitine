@@ -16,7 +16,7 @@
             $this->password = password_hash($password, PASSWORD_BCRYPT);
             $this->username = $username;
             $this->name = $name;
-            $this->surname = $lastname;
+            $this->lastname = $lastname;
             $this->role = $role;
         }
 
@@ -30,6 +30,14 @@
 
         public function recoveryEmail() {
             return $this->recoveryEmail;
+        }
+
+        public function password() {
+            return $this->password;
+        }
+
+        public function setPassword($password) {
+            $this->password = password_hash($password, PASSWORD_BCRYPT);
         }
         
         public function username() {
