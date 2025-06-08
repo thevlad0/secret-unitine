@@ -40,5 +40,9 @@
          public function getRole() {
                  return $this->role;
         }
+
+        public function getId() {
+          return $this->id;
+        }
  }
 ?>
