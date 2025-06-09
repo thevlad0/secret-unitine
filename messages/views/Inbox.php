@@ -11,15 +11,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inbox Interface</title>
-    <link rel="stylesheet" href="./messages/views/css/inbox.css">
+    <base href="<?php echo BASE_URL; ?>">
+    <title>Inbox</title>
+    <link rel="stylesheet" href="messages/views/css/inbox.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
     <div class="inbox-container">
         <aside class="sidebar">
             <div class="sidebar-header">
-                 <button class="compose-btn">
+                <div class="app-title">
+                    <span class="material-symbols-outlined app-logo">all_inbox</span>
+                    <h3>Secret Unitine</h3>
+                </div>
+                <a href="logout" id="logout-btn" class="icon-btn" title="Изход">
+                    <span class="material-symbols-outlined">logout</span>
+                </a>
+            </div>
+
+            <div class="compose-btn-container">
+                <button class="compose-btn">
                     <span class="material-symbols-outlined">edit</span>
                     Ново съобщение
                 </button>
@@ -84,10 +95,11 @@
 
     <script>
         const sessionData = {
-            'userId': "<?php echo $_SESSION['user']['id']; ?>"
+            'userId': "<?php echo $_SESSION['user']['id']; ?>",
+            'baseURL': "<?php echo BASE_URL; ?>",
         };
     </script>
 
-    <script type="module" src="./messages/views/js/inbox.js"></script>
+    <script type="module" src="messages/views/js/inbox.js"></script>
 </body>
 </html>

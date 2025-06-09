@@ -9,9 +9,11 @@
                 $memberList = [];
                 if (is_array($groupMembers)) {
                     foreach ($groupMembers as $member) {
-                        $user = $userStorage->getById($member['memberId']);
-                        if ($user) {
-                            $memberList[] = $user;
+                        if ($group['ownerId'] !== $member['memberId']) {
+                            $user = $userStorage->getById($member['memberId']);
+                            if ($user) {
+                                $memberList[] = $user;
+                            }
                         }
                     }
                 }
@@ -49,7 +51,7 @@
     }
 
     function handleGetGroupMembers($groupId, $groupStorage, $groupMemberStorage, $userStorage) {
-        if (!$groupStorage->exists($groupId)) {
+        if ($groupStorage->exists($groupId)) {
             return [
                 'status' => 'error',
                 'message' => 'Група с такова ID не съществува.',

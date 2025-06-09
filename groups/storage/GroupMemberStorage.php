@@ -14,7 +14,7 @@
 
         public function getAll($groupId) {
             $stmt = $this->conn->prepare("SELECT * FROM group_members WHERE groupId = :groupId");
-            $stmt->bindParam(':groupId', $groupName);
+            $stmt->bindParam(':groupId', $groupId);
             $stmt->execute();
 
             if ($stmt->rowCount() === 0) {
@@ -26,14 +26,14 @@
 
         public function get($groupId) {
             $stmt = $this->conn->prepare("SELECT * FROM group_members WHERE groupId = :groupId");
-            $stmt->bindParam(':groupId', $groupName);
+            $stmt->bindParam(':groupId', $groupId);
             $stmt->execute();
 
             if ($stmt->rowCount() === 0) {
                 return null;
             }
 
-            return $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
         public function add($groupMember) {
@@ -56,7 +56,7 @@
 
         public function removeGroup($groupId) {
             $stmt = $this->conn->prepare("DELETE FROM group_members WHERE groupId = :groupId");
-            $stmt->bindParam(':groupId', $groupName);
+            $stmt->bindParam(':groupId', $groupId);
             return $stmt->execute();
         }
 

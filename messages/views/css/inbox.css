@@ -399,6 +399,16 @@ body {
     margin: 0;
 }
 
+.autocomplete-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--secondary-bg);
+    border: 1px solid var(--border-color);
+    z-index: 1000; 
+}
+
 .add-user-form .autocomplete-container {
     flex-grow: 1;
     position: relative;
@@ -442,4 +452,28 @@ body {
 
 .new-user-name:focus + .add-user-confirm-btn {
     border-color: var(--accent-color);
+}
+
+.sidebar-header {
+    padding: 8px 4px 8px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.app-title {
+    display: flex;
+    align-items: center;
+    color: var(--secondary-text);
+}
+
+.app-title h3 {
+    margin: 0 0 0 8px;
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+.app-logo {
+    margin: 0;
+    color: var(--accent-color);
 }

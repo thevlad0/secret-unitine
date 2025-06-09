@@ -33,9 +33,6 @@
             $userId = (int)($_POST['userId']);
 
             $result = $groupController->addGroupMember($groupId, $userId);
-            if ($result['status'] === 'success') {
-                $result['group']['users'] = $groupController->getGroupUsers($groupId);
-            }
 
             echo json_encode($result);
             break;

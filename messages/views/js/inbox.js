@@ -4,7 +4,6 @@ import { initializeGroups } from './groups.js';
 document.addEventListener('DOMContentLoaded', () => {
 
     initializeCompose();
-
     initializeGroups();
 
     const sidebarNav = document.querySelector('.sidebar-nav ul');

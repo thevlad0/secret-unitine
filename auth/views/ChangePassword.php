@@ -15,7 +15,7 @@
             $authController = new AuthenticationController();
             $result = $authController->changePassword($username, $newPassword, $newPasswordConfirmation);
         if ($result['status'] === 'success') {
-            header("Location: " . BASE_PATH . "/login");
+            header("Location: /" . BASE_PATH . "login");
             exit();
         } else {
             $error = $result['message'];
@@ -33,7 +33,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="<?php echo BASE_URL; ?>">
     <title>Смяна на парола</title>
-    <link rel="stylesheet" href="/auth/views/css/styles.css">
+    <link rel="stylesheet" href="auth/views/css/styles.css">
 </head>
 <body>
     <div class="login-container">

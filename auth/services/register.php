@@ -78,7 +78,7 @@
     function __requestUserData($username) {
         $ch = curl_init();
 
-        $url = "https://localhost/test/secret-unitine/api/user_data_provider.php";
+        $url = BASE_URL . "api/user_data_provider.php";
 
         $postData = [
             'username' => $username,

@@ -38,8 +38,8 @@
             ];
         }
 
-        $groupStorage->remove($groupId);
         $groupMemberStorage->removeGroup($groupId);
+        $groupStorage->remove($groupId);
 
         return [
             'status' => 'success',
@@ -47,26 +47,29 @@
         ];
     }
 
-    function handleAddGroupMember($groupId, $memberId, $groupMemberStorage) {
+    function handleAddGroupMember($groupId, $memberId, $groupMemberStorage, $userStorage) {
         $member = new GroupMember($groupId, $memberId);
         $groupMember = $groupMemberStorage->add($member);
+        $user = $userStorage->getById($memberId);
 
         return [
             'status' => 'success',
             'message' => 'Потребителят е успешно добавен към групата.',
-            'member' => $groupMember
+            'user' => $user
         ];
     }
 
     function handleRemoveGroupMember($groupId, $memberId, $groupMemberStorage) {
-        if (!$groupMemberStorage->exists($groupId, $memberId)) {
+        $groupMember = new GroupMember($groupId, $memberId);
+        
+        if (!$groupMemberStorage->exists($groupMember)) {
             return [
                 'status' => 'error',
                 'message' => 'Потребителят не е член на групата.'
             ];
         }
 
-        $groupMemberStorage->remove(new GroupMember($groupId, $memberId));
+        $groupMemberStorage->remove($groupMember);
 
         return [
             'status' => 'success',

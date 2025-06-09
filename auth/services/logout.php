@@ -17,7 +17,7 @@
 
         session_destroy();
 
-        header("Location: login");
+        header("Location: /" . BASE_PATH . "login");
         exit();
     }
 ?>

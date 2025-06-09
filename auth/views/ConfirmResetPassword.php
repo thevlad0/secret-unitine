@@ -16,7 +16,7 @@
             $result = $authController->confirmResetPassword($username, $code);
 
             if ($result['status'] === 'success') {
-                header("Location: " . BASE_PATH . "/change-password?username=" . urlencode($username));
+                header("Location: /" . BASE_PATH . "change-password?username=" . urlencode($username));
                 exit();
             } else {
                 $errors = $result['message'];
@@ -32,7 +32,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="<?php echo BASE_URL; ?>">
     <title>Потвърждение с код</title>
-    <link rel="stylesheet" href="/auth/views/css/styles.css">
+    <link rel="stylesheet" href="auth/views/css/styles.css">
 </head>
 <body>
     <div class="login-container">
@@ -54,7 +54,7 @@
             <button type="submit" class="login-btn">Потвърди</button>
 
             <div class="form-footer">
-                <p>Не получихте код? <a href="/forgotten-password">Изпрати отново</a></p>
+                <p>Не получихте код? <a href="forgotten-password">Изпрати отново</a></p>
             </div>
         </form>
     </div>

@@ -38,11 +38,11 @@
         }
 
         public function addGroupMember($groupId, $memberId) {
-            return handleAddGroupMember($groupId, $memberId, $this->groupMemberStorage);
+            return handleAddGroupMember($groupId, $memberId, $this->groupMemberStorage, $this->userStorage);
         }
 
         public function removeGroupMember($groupId, $memberId) {
-            return handleRemoveGroup($groupId, $memberId, $this->groupMemberStorage);
+            return handleRemoveGroupMember($groupId, $memberId, $this->groupMemberStorage);
         }
 
         public function removeGroup($groupId) {

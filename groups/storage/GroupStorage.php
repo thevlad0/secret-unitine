@@ -55,7 +55,7 @@
 
         public function remove($groupId) {
             $stmt = $this->conn->prepare("DELETE FROM groups WHERE id = :id");
-            $stmt->bindParam(':id', $groupName);
+            $stmt->bindParam(':id', $groupId);
             return $stmt->execute();
         }
 

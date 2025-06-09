@@ -12,6 +12,6 @@
             return strpos($username, $term) !== false || strpos($firstname, $term) !== false || strpos($lastname, $term) !== false || strpos($name, $term) !== false;
         });
 
-        return $filteredResults;
+        return array_values($filteredResults);
     }
 ?>
