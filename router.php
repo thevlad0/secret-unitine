@@ -11,8 +11,6 @@ $messages_views_path = __DIR__ . '/messages/views';
 
 $request = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-echo $request;
-
 switch ($request) {
     case '/':
     case '/inbox':
