@@ -32,6 +32,9 @@ function showReplyMessageForm(formTitle) {
   } else {
      recipientsTitle.readOnly = false;
      recipientsTitle.placeholder = "Получатели";
+
+     const textArea = document.getElementById('reply-text-area');
+     textArea.value = document.getElementById('message-paragraph').textContent;
      //3. TO DO!!!
      //get the recipients by value and calls the messages sending php script!
   }
