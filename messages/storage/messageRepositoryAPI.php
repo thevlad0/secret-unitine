@@ -18,7 +18,7 @@ interface MessageRepositoryAPI {
     public function getSentMessagesOfUser(int $userId): array;
     public function getInboxOfUser(int $userId): array;
 
-    public function getMessageRecipientsIds($messageId): array;
+    public function getMessageRecipientsIds(int $messageId): array;
      /*
     @messageId -> id of message that must be starred/read
     @userId -> id of current user
