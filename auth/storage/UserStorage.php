@@ -80,7 +80,19 @@
             $stmt->bindParam(':lastname', $lastname);
             $stmt->bindParam(':role', $role);
             
-            return $stmt->execute();
+            if ($stmt->execute()) {
+                return [
+                    'id' => $this->conn->lastInsertId(),
+                    'fn' => $fn,
+                    'email' => $email,
+                    'recoveryEmail' => $recoveryEmail,
+                    'password' => $password,
+                    'username' => $username,
+                    'name' => $name,
+                    'lastname' => $lastname,
+                    'role' => $role
+                ];
+            }
         }
 
         public function update($username, $user) {
