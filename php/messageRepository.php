@@ -212,6 +212,26 @@ class MessageRepository implements MessageRepositoryAPI {
         }
     }
 
+    //newly added function
+    public function getMessageById(int $messageId) {
+        try {
+            $connection = $this->db->getConnection();
+            $sql = "SELECT * FROM messages WHERE id=?";
+            $statement = $connection->prepare($sql);
+            $statement->execute($messageId);
+
+            $statement->setFetchMode(PDO::FETCH_CLASS, 'Message');
+            $message = $statement->fetch();
+            return $message;           
+        }
+         catch (PDOException $e) {
+            error_log(date("Y-m-d H:i:s") . " - Error occurred while extracting a message with id=$messageId : "
+             . $e->getMessage() . "\n", 3, "../logs/error_log.txt");
+            http_response_code(500);
+        }
+    }
+    //end
+
     public function filterByStar(int $userId, string $folderName) : array {
         try {
             $connection = $this->db->getConnection();
