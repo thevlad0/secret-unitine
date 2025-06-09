@@ -19,8 +19,8 @@ class Message {
     }
 
     public function setChainNumber(int $newValue) {
-        if (newValue > 0) {
-            $this->chainNumber = newValue;
+        if ($newValue > 0) {
+            $this->chainNumber = $newValue;
         } else {
             throw new InvalidArgumentException('New value of chain Number must be positive number. Input was: '.$newValue);
         }
