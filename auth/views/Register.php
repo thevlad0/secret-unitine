@@ -30,37 +30,61 @@
     }
 ?>
 
-<html> 
+<!DOCTYPE html>
+<html lang="bg">
+<head> 
     <meta charset="UTF-8">
-    <head> 
-        <title>Register</title> 
-        <link rel="stylesheet"  href="registration.css">
-    </head>
-    <body> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title> 
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body> 
+    <div class="login-container">
         <form id="register-form" action="" method="POST">
-            <label class="input-label" for="username">Потребителско име:</label>
-            <input class="input-field" type="text" name="username" placeholder="Въведете потребителско име" required>
+            <h2>Създаване на профил</h2>
 
-            <label class="input-label" for="email">Имейл:</label>
-            <input class="input-field" type="email" name="email" inputmode="email" placeholder="Въведете имейл" required>
-
-            <label class="input-label" for="password">Парола:</label>
-            <input class="input-field" type="password" name="password" placeholder="Въведете парола" required>
+            <div class="form-group">
+                <label for="username">Потребителско име</label>
+                <input id="username" type="text" name="username" required>
+            </div>
             
-            <label class="input-label" for="confirm-password">Потвърди паролата:</label>
-            <input class="input-field" type="password" name="confirm-password" placeholder="Потвърдете паролата" required>
+            <div class="form-group">
+                <label for="email">Имейл</label>
+                <input id="email" type="email" name="email" inputmode="email" required>
+            </div>
 
-            <?php
-                if (!empty($errors)) {
-                    $errorStr = '';
-                    foreach ($errors as $error) {
-                        $errorStr .= htmlspecialchars($error) . '<br>';
-                    }
-                    echo '<p class="error">' . $errorStr . '</p>';
-                }
-            ?>
+            <div class="form-group">
+                <label for="password">Парола</label>
+                <input id="password" type="password" name="password" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="confirm-password">Потвърди паролата</label>
+                <input id="confirm-password" type="password" name="confirm-password" required>
+            </div>
 
-            <button type="submit" id="register-btn">Регистрация</button>            
+            <?php if (!empty($errors)): ?>
+                <div class="error-message">
+                    <?php 
+                        // Ако $errors е масив, го обхождаме
+                        if (is_array($errors)) {
+                            foreach ($errors as $error) {
+                                echo htmlspecialchars($error) . '<br>';
+                            }
+                        } else {
+                            // Ако е само текст, го извеждаме директно
+                            echo htmlspecialchars($errors);
+                        }
+                    ?>
+                </div>
+            <?php endif; ?>
+
+            <button type="submit" class="login-btn">Регистрация</button>            
+
+            <div class="form-footer">
+                <p>Вече имате профил? <a href="/login">Вход</a></p>
+            </div>
         </form>
-    </body>
+    </div>
+</body>
 </html>

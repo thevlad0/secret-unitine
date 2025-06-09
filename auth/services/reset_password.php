@@ -14,7 +14,7 @@
         
         $passwordReset = new PasswordReset($username, $resetToken, $expiresAt);
 
-        $result = __sendEmail($user->recoveryEmail(), $resetToken);
+        $result = __sendEmail($user['recoveryEmail'], $resetToken);
 
         if (!$result) {
             return [
@@ -41,7 +41,7 @@
         }
 
         $currentTime = date('Y-m-d H:i:s');
-        if ($currentTime > $passwordReset->expiresAt()) {
+        if ($currentTime > $passwordReset['expiresAt']) {
             return [
                 'status' => 'error',
                 'message' => 'Кодът е изтекъл.'
@@ -79,8 +79,8 @@
             ];
         }
 
-        $user->setPassword($newPassword);
-        $userStorage->add($user);
+        $user['password'] = password_hash($newPassword, PASSWORD_BCRYPT);
+        $userStorage->update($user['username'], $user);
 
         return [
             'status' => 'success',

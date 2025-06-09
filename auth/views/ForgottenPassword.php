@@ -33,20 +33,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forgotten Password</title>
+    <title>Забравена парола</title>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <form id="forgotten-password" method="POST">
-        <label class="input-label" for="username" id="username-label">Потребителско име:</label>
-        <input class="input-field" type="text" name="username" placeholder="Въведете потребителското си име" required>
-        
-        <?php
-            if (!empty($error)) {
-                echo '<p class="error">' . htmlspecialchars($error) . '</p>';
-            }
-        ?>
-        
-        <button class="button" type="submit" id="send-code-btn">Изпрати код</button>
-    </form>
+    <div class="login-container">
+        <form id="forgotten-password-form" method="POST">
+            <h2>Възстановяване</h2>
+            <p class="form-description">
+                Въведете потребителското си име и ние ще ви изпратим инструкции за възстановяване на паролата.
+            </p>
+
+            <div class="form-group">
+                <label for="username">Потребителско име</label>
+                <input id="username" type="text" name="username" required>
+            </div>
+            
+            <?php if (!empty($error)): ?>
+                <p class="error-message"><?php echo htmlspecialchars($error); ?></p>
+            <?php endif; ?>
+            
+            <button type="submit" class="login-btn">Изпрати код</button>
+
+            <div class="form-footer">
+                <a href="/login">Върни се към Вход</a>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

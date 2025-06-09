@@ -20,23 +20,31 @@
                 return [];
             }
 
-            $users_data = $stmt->fetchALL(PDO::FETCH_ASSOC);
-            $users = [];
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
 
-            foreach ($users_data as $user_data) {
-                $users[] = new User(
-                    $user_data['fn'],
-                    $user_data['email'],
-                    $user_data['recoveryEmail'],
-                    $user_data['password'],
-                    $user_data['username'],
-                    $user_data['name'],
-                    $user_data['lastname'],
-                    $user_data['role']
-                );
+        public function getById($id) {
+            $stmt = $this->conn->prepare("SELECT * FROM users WHERE id = :id");
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+
+            if ($stmt->rowCount() === 0) {
+                return null;
             }
 
-            return $users;
+            return $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
+        }
+
+        public function getByEmail($email) {
+            $stmt = $this->conn->prepare("SELECT * FROM users WHERE email = :email");
+            $stmt->bindParam(':email', $email);
+            $stmt->execute();
+
+            if ($stmt->rowCount() === 0) {
+                return null;
+            }
+
+            return $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
         }
 
         public function get($username) {
@@ -48,22 +56,11 @@
                 return null;
             }
 
-            $user_data = $stmt->fetchALL(PDO::FETCH_ASSOC)[0];
-
-            return new User(
-                $user_data['fn'],
-                $user_data['email'],
-                $user_data['recoveryEmail'],
-                $user_data['password'],
-                $user_data['username'],
-                $user_data['name'],
-                $user_data['lastname'],
-                $user_data['role']
-            );
+            return $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
         }
 
         public function add($user) {
-            $stmt = $this->conn->prepare("INSERT INTO users (fn, email, recoveryEmail, password, username, name, surname, role) VALUES (:fn, :email, :recoveryEmail, :password, :username, :name, :surname, :role)");
+            $stmt = $this->conn->prepare("INSERT INTO users (fn, email, recoveryEmail, password, username, name, lastname, role) VALUES (:fn, :email, :recoveryEmail, :password, :username, :name, :lastname, :role)");
             
             $fn = $user->fn();
             $email = $user->email();
@@ -71,7 +68,7 @@
             $password = $user->password();
             $username = $user->username();
             $name = $user->name();
-            $surname = $user->lastname();
+            $lastname = $user->lastname();
             $role = $user->role();
             
             $stmt->bindParam(':fn', $fn);
@@ -80,7 +77,31 @@
             $stmt->bindParam(':password', $password);
             $stmt->bindParam(':username', $username);
             $stmt->bindParam(':name', $name);
-            $stmt->bindParam(':surname', $surname);
+            $stmt->bindParam(':lastname', $lastname);
+            $stmt->bindParam(':role', $role);
+            
+            return $stmt->execute();
+        }
+
+        public function update($username, $user) {
+            $stmt = $this->conn->prepare("UPDATE users SET fn = :fn, email = :email, recoveryEmail = :recoveryEmail, password = :password, name = :name, lastname = :lastname, role = :role WHERE username = :username");
+            
+            $fn = $user['fn'];
+            $email = $user['email'];
+            $recoveryEmail = $user['recoveryEmail'];
+            $password = $user['password'];
+            $username = $user['username'];
+            $name = $user['name'];
+            $lastname = $user['lastname'];
+            $role = $user['role'];
+            
+            $stmt->bindParam(':fn', $fn);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':recoveryEmail', $recoveryEmail);
+            $stmt->bindParam(':password', $password);
+            $stmt->bindParam(':username', $username);
+            $stmt->bindParam(':name', $name);
+            $stmt->bindParam(':lastname', $lastname);
             $stmt->bindParam(':role', $role);
             
             return $stmt->execute();

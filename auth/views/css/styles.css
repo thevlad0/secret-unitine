@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+:root {
+    --primary-color: #4A90E2; 
+    --primary-hover-color: #357ABD; 
+    --light-grey-color: #f4f7f6;
+    --border-color: #ddd; 
+    --text-color: #333;
+    --error-color: #e74c3c;
+    --white-color: #fff;
+    --label-color: #666;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--light-grey-color);
+    color: var(--text-color);
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+}
+
+.login-container {
+    background-color: var(--white-color);
+    padding: 2.5rem 2rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.login-container h2 {
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.form-group {
+    margin-bottom: 1.25rem;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--label-color);
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+}
+
+.login-btn {
+    width: 100%;
+    padding: 0.85rem;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 1rem;
+}
+
+.login-btn:hover {
+    background-color: var(--primary-hover-color);
+}
+
+.error-message {
+    color: var(--error-color);
+    background-color: rgba(231, 76, 60, 0.1);
+    border: 1px solid var(--error-color);
+    border-radius: 8px;
+    padding: 0.75rem;
+    margin-bottom: 1.25rem;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.form-footer {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--label-color);
+}
+
+.form-footer a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.form-footer a:hover {
+    text-decoration: underline;
+}
+
+.form-footer p {
+    margin-bottom: 0.5rem;
+}

@@ -30,20 +30,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Confirm Reset Password</title>
+    <title>Потвърждение с код</title>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <form id="reset-password" method="POST">
-        <label class="input-label" id="code-label">Изпратихме код за потвърждение на имейла Ви. Моля, въведете го по-долу:</label>
-        <input class="input-field" type="text" name="code" inputmode="numeric" placeholder="Въведете получения код" required>
+    <div class="login-container">
+        <form id="reset-password-form" method="POST" action="?username=<?php echo htmlspecialchars(urlencode($username)); ?>">
+            <h2>Потвърждение с код</h2>
+            <p class="form-description">
+                Изпратихме код за потвърждение на имейла, свързан с потребителското име <strong><?php echo htmlspecialchars($username); ?></strong>. Моля, въведете го по-долу:
+            </p>
 
-        <?php
-            if (!empty($errors)) {
-                echo '<p class="error">' . htmlspecialchars($errors) . '</p>';
-            }
-        ?>
+            <div class="form-group">
+                <label for="code">Код за потвърждение</label>
+                <input id="code" class="input-field" type="text" name="code" inputmode="numeric" required>
+            </div>
 
-        <button class="button" type="submit" id="send-code-btn">Потвърждаване</button>
-    </form>
+            <?php if (!empty($errors)): ?>
+                <p class="error-message"><?php echo htmlspecialchars($errors); ?></p>
+            <?php endif; ?>
+
+            <button type="submit" class="login-btn">Потвърди</button>
+
+            <div class="form-footer">
+                <p>Не получихте код? <a href="/forgotten-password">Изпрати отново</a></p>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

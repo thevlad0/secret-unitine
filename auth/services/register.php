@@ -32,7 +32,7 @@
             $result['fn'],
             $result['email'],
             $email,
-            $password,
+            password_hash($password, PASSWORD_BCRYPT),
             $username,
             $result['name'],
             $result['lastname'],

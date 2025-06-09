@@ -27,31 +27,42 @@
     } 
 ?>
 
-<html> 
+<!DOCTYPE html>
+<html lang="bg">
+<head>
     <meta charset="UTF-8">
-    <head> 
-        <title>Login</title> 
-        <link rel="stylesheet" href="css/styles.css">
-    </head>
-    <body> 
-        <form id="login-form" action="" method="POST">      
-            <label class="input-label" for="username">Имейл:</label>
-            <input class="input-field" type="text" name="username" placeholder="Въведете имейл" required>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход в системата</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
 
-            <label class="input-label" for="password">Парола:</label>
-            <input class="input-field" type="password" name="password" placeholder="Въведете парола" required>
+    <div class="login-container">
+        <form id="login-form" action="" method="POST">
+            <h2>Вход</h2>
 
-            <?php
-                if (!empty($error)) {
-                    echo '<p class="error">' . htmlspecialchars($error) . '</p>';
-                }
-            ?>
+            <div class="form-group">
+                <label for="username">Имейл</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Парола</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <?php if (!empty($error)): ?>
+                <p class="error-message"><?php echo htmlspecialchars($error); ?></p>
+            <?php endif; ?>
             
-            <button class="button" type="submit" id="login-btn">Вход</button> 
+            <button type="submit" class="login-btn">Вход</button>
 
-            <a id="forgotten-password" href="#/forgotten-password">Забравена парола?</a>
-            <p class="label" id="register-label" for="register-link">Нямаш профил?</п>
-            <a id="register-link" href="#/register">Регистрирай се тук!</a>
+            <div class="form-footer">
+                <p>Нямате профил? <a href="/register">Регистрация</a></p>
+                <a href="/forgotten-password">Забравена парола?</a>
+            </div>
         </form>
-    </body>
+    </div>
+
+</body>
 </html>

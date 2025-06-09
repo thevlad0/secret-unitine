@@ -21,13 +21,7 @@
                 return null;
             }
 
-            $reset_data = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            return new PasswordReset(
-                $reset_data['username'],
-                $reset_data['resetToken'],
-                $reset_data['expiresAt']
-            );
+            return $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
         }
 
         public function add($password_reset) {
