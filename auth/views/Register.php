@@ -24,7 +24,6 @@
                 exit();
             } else {
                 $errors = $result['message'];
-                echo $result['message'];
             }
         }
     }
@@ -66,13 +65,11 @@
             <?php if (!empty($errors)): ?>
                 <div class="error-message">
                     <?php 
-                        // Ако $errors е масив, го обхождаме
                         if (is_array($errors)) {
                             foreach ($errors as $error) {
                                 echo htmlspecialchars($error) . '<br>';
                             }
                         } else {
-                            // Ако е само текст, го извеждаме директно
                             echo htmlspecialchars($errors);
                         }
                     ?>

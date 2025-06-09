@@ -37,7 +37,7 @@
         }
 
         public function add($groupMember) {
-            $stmt = $this->conn->prepare("INSERT INTO group_members (groupId, memeberId) VALUES (:groupId, :memberId)");
+            $stmt = $this->conn->prepare("INSERT INTO group_members (groupId, memberId) VALUES (:groupId, :memberId)");
             
             $groupId = $groupMember->group();
             $memberId = $groupMember->member();

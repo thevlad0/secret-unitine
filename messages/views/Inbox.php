@@ -81,10 +81,10 @@
 
     <script>
         const sessionData = {
-            'userId': "<?php echo $_SESSION['userID']; ?>"
+            'userId': "<?php echo $_SESSION['user']['id']; ?>"
         };
     </script>
 
-    <script src="./js/inbox.js"></script>
+    <script type="module" src="./js/inbox.js"></script>
 </body>
 </html>

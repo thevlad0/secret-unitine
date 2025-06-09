@@ -39,7 +39,7 @@
         ], JSON_UNESCAPED_UNICODE);
     } else {
         echo json_encode([
-            "success" => "error",
+            "status" => "error",
             "message" => "Потребителят не е намерен."
         ], JSON_UNESCAPED_UNICODE);
     }

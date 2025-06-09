@@ -2,17 +2,24 @@
     function handleGetAllGroups($groupStorage, $groupMemberStorage, $userStorage) {
         $groups = $groupStorage->getAll();
 
-        foreach ($groups as &$group) {
-            $groupMembers = $groupMemberStorage->get($group['id']);
-            $memberList = [];
-
-            if ($groupMembers) {
-                foreach ($groupMembers as $member) {
-                    $memberList[] = $userStorage->getById($member['memberId']);
+        if (is_array($groups)) {
+            foreach ($groups as &$group) {
+                $groupMembers = $groupMemberStorage->get($group['id']);
+                
+                $memberList = [];
+                if (is_array($groupMembers)) {
+                    foreach ($groupMembers as $member) {
+                        $user = $userStorage->getById($member['memberId']);
+                        if ($user) {
+                            $memberList[] = $user;
+                        }
+                    }
                 }
-            }
 
-            $group['users'] = $memberList;
+                $group['users'] = $memberList;
+            }
+        } else {
+            $groups = [];
         }
 
         return [
@@ -23,12 +30,12 @@
     }
 
     function handleGetUserGroups($userId, $groupStorage, $groupMemberStorage, $userStorage) {
-        $userGroups = handleGetAllGroups($groupStorage, $groupMemberStorage, $userStorage);
+        $allGroupsData = handleGetAllGroups($groupStorage, $groupMemberStorage, $userStorage)['groups'];
 
         $groupList = [];
-        if ($userGroups) {
-            foreach ($userGroups as $group) {
-                if ($group['ownerId'] === $userId) {
+        if (!empty($allGroupsData)) {
+            foreach ($allGroupsData as $group) {
+                if (isset($group['ownerId']) && $group['ownerId'] === (int)$userId) {
                     $groupList[] = $group;
                 }
             }
@@ -41,13 +48,24 @@
         ];
     }
 
-    function handleGetGroupMembers($groupId, $groupMemberStorage, $userStorage) {
+    function handleGetGroupMembers($groupId, $groupStorage, $groupMemberStorage, $userStorage) {
+        if (!$groupStorage->exists($groupId)) {
+            return [
+                'status' => 'error',
+                'message' => 'Група с такова ID не съществува.',
+                'members' => []
+            ];
+        }
+        
         $groupMembers = $groupMemberStorage->get($groupId);
 
         $memberList = [];
-        if ($groupMembers) {
+        if (is_array($groupMembers)) {
             foreach ($groupMembers as $member) {
-                $memberList[] = $userStorage->getById($member['memberId']);
+                $user = $userStorage->getById($member['memberId']);
+                if ($user) {
+                    $memberList[] = $user;
+                }
             }
         }
 

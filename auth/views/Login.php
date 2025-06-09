@@ -42,7 +42,7 @@
             <h2>Вход</h2>
 
             <div class="form-group">
-                <label for="username">Имейл</label>
+                <label for="username">Потребителско име</label>
                 <input type="text" id="username" name="username" required>
             </div>
 

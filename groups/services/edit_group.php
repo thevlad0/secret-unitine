@@ -21,7 +21,7 @@
         $group = $groupStorage->add($group);
 
         $member = new GroupMember($group['id'], $ownerId);
-        $result = $groupMemberStorage->add($member);
+        $groupMemberStorage->add($member);
 
         return [
             'status' => 'success',
@@ -49,12 +49,12 @@
 
     function handleAddGroupMember($groupId, $memberId, $groupMemberStorage) {
         $member = new GroupMember($groupId, $memberId);
-        $result = $groupMemberStorage->add($member);
+        $groupMember = $groupMemberStorage->add($member);
 
         return [
             'status' => 'success',
             'message' => 'Потребителят е успешно добавен към групата.',
-            'member' => $result
+            'member' => $groupMember
         ];
     }
 

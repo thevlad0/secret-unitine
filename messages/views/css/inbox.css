@@ -329,6 +329,33 @@ body {
     color: var(--primary-text);
 }
 
+/* Подобрен бутон за показване на формата */
+.add-user-show-btn {
+    background-color: transparent;
+    border: 1px dashed var(--border-color); /* Правим го пунктиран, за да изглежда по-леко */
+    color: var(--secondary-text);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 6px 14px; /* Малко повече "въздух" */
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 18px; /* Заобляме го като хапче */
+    transition: all 0.2s ease;
+}
+
+.add-user-show-btn:hover {
+    background-color: var(--hover-bg);
+    color: var(--accent-color);
+    border-color: var(--accent-color);
+    border-style: solid; /* При hover става плътна линия */
+}
+
+.add-user-show-btn .material-symbols-outlined {
+    margin-right: 8px;
+    font-size: 20px;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -338,4 +365,81 @@ body {
         opacity: 1;
         transform: scale(1);
     }
+}
+
+.add-user-form.collapsed {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    margin-top: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    border: none;
+}
+
+.add-user-form {
+    display: flex;
+    align-items: center;
+    gap: 0;
+}
+
+.add-group-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+}
+.add-group-container #new-group-name {
+    flex-grow: 1;
+    margin: 0;
+    min-width: 0;
+}
+.add-group-container #add-group-btn {
+    flex-shrink: 0;
+    margin: 0;
+}
+
+.add-user-form .autocomplete-container {
+    flex-grow: 1;
+    position: relative;
+    min-width: 0;
+}
+
+.new-user-name {
+    flex-grow: 1;
+    border: 1px solid var(--border-color);
+    border-right: none;
+    border-radius: 18px 0 0 18px;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    height: 38px;
+    box-sizing: border-box;
+    background-color: var(--secondary-bg);
+    transition: border-color 0.2s ease;
+}
+
+.new-user-name:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 1px var(--accent-color);
+}
+
+.add-user-form .new-user-name {
+    width: 100%;
+}
+
+.add-user-form .add-user-confirm-btn {
+    height: 38px;
+    padding: 0 10px;
+    border: 1px solid var(--border-color);
+    border-left: 1px solid var(--border-color);
+    border-radius: 0 18px 18px 0;
+    background-color: var(--primary-bg);
+    transition: border-color 0.2s ease;
+    display: flex;
+    align-items: center;
+}
+
+.new-user-name:focus + .add-user-confirm-btn {
+    border-color: var(--accent-color);
 }

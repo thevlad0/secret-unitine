@@ -30,7 +30,7 @@
         }
 
         public function getGroupMembers($groupId) {
-            return handleGetGroupMembers($groupId, $this->groupMemberStorage, $this->userStorage);
+            return handleGetGroupMembers($groupId, $this->groupMemberStorage, $this->groupMemberStorage, $this->userStorage);
         }
 
         public function createGroup($groupName, $ownerId) {

@@ -39,11 +39,12 @@
             $result['role']
         );
 
-        $userStorage->add($user);
+        $user = $userStorage->add($user);
 
         return [
             'status' => 'success',
             'message' => 'Регистрацията е успешна.',
+            'user' => $user
         ];
     }
 
