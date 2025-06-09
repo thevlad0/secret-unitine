@@ -7,7 +7,8 @@
     <link href="./css/open-message.css" rel="stylesheet" />
     <!--<script src="../../javascript/new-message.js" defer></script>-->
     <script src="./js/message-reply.js" defer></script> 
-     <script src="./js/read-message-from-db.js" defer></script> 
+    <!--<script src="./js/read-message-from-db.js" defer></script>-->
+     <script src="./js/add-notes.js" defer></script> 
 </head>
 
 <body id="page-body">
@@ -47,12 +48,12 @@
               
     <section id="messages-table-section"> 
            <form id="open-message-form">
-               <h2 id="message-title">
+               <h2 id="message-title"  class="annotatable">
                  Тема на съобщението
                </h2>              
                <section id="message-text">
                  <h3 id="message-sender">Изпращач на съобщението</h3>
-                    <p id="message-paragraph">
+                    <p id="message-paragraph"  class="annotatable">
                       Текст на съобщението
                     </p>           
 
@@ -68,7 +69,7 @@
             
     <section>
             <div id="new-message" style="display: none;">
-                <form id="new-message-form">
+                <form id="new-message-form"  class="annotatable">
                     <div>
                         <table>
                             <tbody>
@@ -112,7 +113,7 @@
     </main>
        <!--Reply-message form--> 
                     <section id="reply-form-container"  style="display: none;">
-                        <form id="reply-form">
+                        <form id="reply-form"  class="annotatable">
                             <section class="reply-form-header">
                                 <h3 id="reply-message-title">Отговор</h3>                                
                                 <img src="../../img/cancel.png" alt="Затвори" id="close-reply-form" />

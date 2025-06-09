@@ -9,6 +9,19 @@ body {
     font-family: 'Roboto', sans-serif, Arial;
 }
 
+/*Notes' styling*/
+.annotatable:hover{
+  cursor: pointer;
+}
+
+.sticky-note{
+  resize: both;
+  overflow: auto;
+}
+
+.note-corner-icon:hover{
+    cursor: pointer;
+}
 
 #create-message {
     border-radius: 16px;

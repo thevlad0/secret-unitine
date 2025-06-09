@@ -12,33 +12,33 @@ $messages_views_path = __DIR__ . '/messages/views';
 $request = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 switch ($request) {
-    case '/':
-    case '/inbox':
+    case BASE_PATH . '/':
+    case BASE_PATH . '/inbox':
         require $messages_views_path . '/Inbox.php';
         break;
 
-    case '/register':
+    case BASE_PATH . '/register':
         require $auth_views_path . '/Register.php';
         break;
 
-    case '/login':
+    case BASE_PATH . '/login':
         require $auth_views_path . '/Login.php';
         break;
 
-    case '/logout':
+    case BASE_PATH . '/logout':
         require $auth_views_path . '/Logout.php';
         break;
 
-    case '/forgotten-password':
+    case BASE_PATH . '/forgotten-password':
         require $auth_views_path . '/ForgottenPassword.php';
         break;
 
-    case '/confirm-reset-password':
+    case BASE_PATH . '/confirm-reset-password':
         $username = $_GET['username'];
         require $auth_views_path . '/ConfirmResetPassword.php';
         break;
 
-    case '/change-password':
+    case BASE_PATH . '/change-password':
         $username = $_GET['username'];
         require $auth_views_path . '/ChangePassword.php';
         break;
