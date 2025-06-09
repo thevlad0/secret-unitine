@@ -20,7 +20,7 @@
 
             if ($result['status'] === 'success') {
                 $_SESSION['user'] = $result['user'];
-                header("Location: /inbox");
+                header("Location: " . BASE_PATH . "/inbox");
                 exit();
             } else {
                 $errors = $result['message'];
@@ -34,8 +34,9 @@
 <head> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="<?php echo BASE_URL; ?>">
     <title>Регистрация</title> 
-    <link rel="stylesheet" href="./auth/views/css/styles.css">
+    <link rel="stylesheet" href="/auth/views/css/styles.css">
 </head>
 <body> 
     <div class="login-container">
