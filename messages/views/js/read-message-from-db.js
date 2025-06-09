@@ -8,7 +8,7 @@ const urlParams = new URLSearchParams(window.location.search);  //!!!
 const messageId = urlParams.get("messageId");
 
 
-fetch(`../../../api/messages/read-message-from-db.php?messageId=${messageId}`)   //To test in postman!!!
+fetch(`../../services/read-message-from-db.php?messageId=${messageId}`)   //To test in postman!!!
   .then(async res => {
     const message = res.json();
 
