@@ -1,5 +1,5 @@
 <?php 
-    require_once('messageRepository.php');
+    require_once(__DIR__ . '/../../php/messageRepository.php');
 
     session_start();
 

@@ -4,9 +4,9 @@
 <head>
     <title>Secret Unitine</title>
     <meta charset="UTF-8" />
-    <link href="open-message.css" rel="stylesheet" />
+    <link href="./css/open-message.css" rel="stylesheet" />
     <script src="../../javascript/new-message.js" defer></script>  
-    <script src="message-reply.js" defer></script> 
+    <script src="./js/message-reply.js" defer></script> 
 </head>
 
 <body id="page-body">
@@ -21,23 +21,23 @@
         <section id = "menu-section">
             <div id="menu-div">
                 <h2 id = "create-message" class="menu-option">
-                    <img id="pencil-icon" class="icons" src="./img/pencil.png" alt="Pencil icon" />
+                    <img id="pencil-icon" class="icons" src="../../img/pencil.png" alt="Pencil icon" />
                     Ново съобщение
                 </h2>            
                 <h2 id = "inbox" class="menu-option">
-                    <img id="inbox-icon" class="icons" src="./img/inbox.png" alt="Inbox icon" />
+                    <img id="inbox-icon" class="icons" src="../../img/inbox.png" alt="Inbox icon" />
                     Входяща поща
                 </h2>
                 <h2 id = "inbox" class="menu-option">
-                    <img id="sent-icon" class="icons" src="./img/sent.png" alt="Sent icon" />
+                    <img id="sent-icon" class="icons" src="../../img/sent.png" alt="Sent icon" />
                     Изпратени
                 </h2>
                 <h2 id = "inbox" class="menu-option">
-                    <img id="star-icon" class="icons" src="./img/star.png" alt="Star icon" />
+                    <img id="star-icon" class="icons" src="../../img/star.png" alt="Star icon" />
                     Със звезда
                 </h2>
                 <h2 id = "inbox" class="menu-option">
-                    <img id="bin-icon" class="icons" src="./img/bin.png" alt="Bin icon" />
+                    <img id="bin-icon" class="icons" src="../../img/bin.png" alt="Bin icon" />
                     Изтрити
                 </h2>
                 <!--Drafts??-->
@@ -75,9 +75,9 @@
                                     <td id="new-message-title">
                                         <h2>Ново съобщение</h2>
                                     </td>
-                                    <td><img id="minimize-icon" class="new-message-nav-icons" src="./img/minimize.png"
+                                    <td><img id="minimize-icon" class="new-message-nav-icons" src="../../img/minimize.png"
                                             alt="Minimize icon" title="Намаляване" /></td>
-                                    <td><img id="cancel-icon" class="new-message-nav-icons" src="./img/cancel.png"
+                                    <td><img id="cancel-icon" class="new-message-nav-icons" src="../../img/cancel.png"
                                             alt="Cancel icon" title="Затваряне БЕЗ запазване" /></td>
                                 </tr>
                             </tbody>
@@ -98,7 +98,7 @@
                             <tbody>
                                 <tr>
                                     <td><input type="submit" id="send-message-button" value="Изпращане" /></td>
-                                    <td><img id="attach-files-icon" class="icons" src="./img/attach-files.png"
+                                    <td><img id="attach-files-icon" class="icons" src="../../img/attach-files.png"
                                             alt="attach-files icon" /></td>
                                 </tr>
                             </tbody>
@@ -114,7 +114,7 @@
                         <form id="reply-form">
                             <section class="reply-form-header">
                                 <h3 id="reply-message-title">Отговор</h3>                                
-                                <img src="./img/cancel.png" alt="Затвори" id="close-reply-form" />
+                                <img src="../../img/cancel.png" alt="Затвори" id="close-reply-form" />
                             </section>
                             <input id="recipients-title" type="text" readonly>
                             <textarea id="reply-text-area" placeholder="Въведете съобщение" rows="6"></textarea>
