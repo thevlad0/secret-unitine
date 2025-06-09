@@ -1,0 +1,235 @@
+#header-part {
+    padding-left: 4%;
+}
+
+body {
+    background-color:  #A7C7E7;
+    height: 100vh;
+    overflow: hidden;
+}
+
+
+#create-message {
+    border-radius: 16px;
+    background-color: lightblue;
+    cursor: pointer;
+}
+
+#new-message{
+    float:right;
+    border: 2px solid black;
+    padding-bottom: 0px;
+   /* display: none;*/
+
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+    background-color: #FFFFF0;
+}
+
+.message-header {
+    width: 98%;
+}
+
+#new-message-title {
+    padding-right: 160px;
+}
+
+.new-message-nav-icons{
+    padding-right: 16px;
+    cursor: pointer;
+}
+
+#message-buttons-section {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  height: 20%;
+  margin: auto;
+  padding-top: 2%;
+}
+
+
+#send-message-button, #reply-message-button, #chain-button, #forward-button, #reply-to-all-button{
+    border-radius: 16px;
+    background-color:cornflowerblue;
+    color: white;
+}
+
+#chain-button, #reply-to-all-button, #reply-message-button, #forward-button {
+   background-color:cornflowerblue;
+   font-size: 1em;
+   height: 35%;
+   padding: 0.5%;
+   width: 17%;
+   font-weight: bold;
+}
+
+#chain-button{
+   width: 21%;
+   height: 38%;
+   padding: 0.7%;
+}
+
+#reply-to-all-button{
+   width: 19%;
+   height: 37%;
+   padding: 0.7%;
+}
+
+#reply-message-button:hover, #chain-button:hover, 
+#reply-to-all-button:hover, #forward-button:hover,
+#send-reply-button:hover{
+    background-color:#e0e0e0;
+    cursor: pointer;
+}
+
+#attach-files-icon {
+    padding-left: 16px;
+}
+
+#main-page {
+    display: flex;    
+    height: 85%;
+    background-color: #FFFFF0;
+    border-radius: 10px;    
+}
+
+#messages-table-section {
+    width: 80%;
+    height: 100%;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+#open-message-form {
+    padding-top: 3%;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+}
+
+#menu-section {
+    width: 20%;
+    background-color: #F9F6EE;
+    border-radius: 10px;
+}
+
+.menu-option:hover {
+    background-color: lightblue;
+    cursor: pointer;
+}
+
+#menu-div {
+    padding-left: 40px;
+}
+
+#message-title {
+    width: 60%;
+    background-color: #F9F6EE;
+    margin-top: 2%;
+    margin: auto;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    text-align: center;
+    border: 1px solid grey;
+    border-radius: 10px;
+}
+
+#message-text {
+    padding-top: 2%;
+    height: 70%;
+    width: 100%;       
+}
+
+#message-sender{
+    width:80%;
+    margin:auto;
+    padding-bottom: 1%;
+}
+
+#message-paragraph {
+    text-align: left;
+    width: 80%;
+    height: 80%;
+    margin: auto;
+    font-size: 1.2em;
+    overflow-wrap: break-word;
+    word-wrap: break-word;   
+    max-width: 100%;
+    border: 1px solid grey;
+    border-radius: 10px;
+}
+
+/*Reply-form styling*/
+
+#reply-form-container {  
+    position: fixed; 
+    bottom: 0px;
+    left: 0px;
+    margin: auto; 
+    bottom: 0;
+    right: 0;
+    width: 40%;
+    background-color: #FFFFF0;
+    border-top: 2px solid black;
+    border-left: 2px solid black;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+    padding: 1em;
+    border-radius: 16px 0 0 0;
+}
+
+#reply-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.reply-form-header {
+    display: flex;
+    height: 10%;
+    justify-content: space-between;   
+    font-weight: bold;
+    margin-bottom: 0.2em;
+}
+
+#reply-message-title{
+    margin: 0;
+}
+
+#recipients-title{
+    margin-top: 1%;
+    margin-bottom: 2%;
+}
+
+.reply-form-header img {
+    width: 3%;
+    height: 3%;
+    cursor: pointer;
+}
+
+#reply-text-area {    
+    font-size: 1.2em;
+    padding: 0.1em;
+    border-radius: 8px;
+    border: 1px solid grey;
+    padding-top: 0;
+    margin-bottom: 0.5em;
+}
+
+.reply-form-actions {
+    text-align: right;
+}
+
+.reply-form-actions button {
+    background-color: cornflowerblue;
+    color: white;
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.reply-form-actions button:hover {
+    background-color: #4a90e2;
+}
