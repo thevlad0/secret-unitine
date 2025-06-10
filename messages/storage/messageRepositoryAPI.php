@@ -11,18 +11,12 @@ interface MessageRepositoryAPI {
     */
     public function removeMessageOfFolder(int $messageId, int $userId, string $folderName);
 
-    /*
-    @userId -> id of current user
-    Returns an array with messages
-    */
-    public function getSentMessagesOfUser(int $userId): array;        //to remove!!!!
-    public function getInboxOfUser(int $userId): array;
-
     public function getMessageRecipientsIds(int $messageId): array;
      /*
     @messageId -> id of message that must be starred/read
     @userId -> id of current user
     @folderName = current folder{Inbox, SentMessages or Deleted}
+    Returns an array with messages
     */
     public function changeStarredStatusOfMessage(bool $isStarred, int $messageId, int $userId, string $folderName);
 

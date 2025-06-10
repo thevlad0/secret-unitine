@@ -8,18 +8,10 @@ class Message {
     private $chainNumber;
     private $isAnonymous;
     private $senderUsername;
+    private $isRead;
+    private $isStarred;
 
-    /*public function __construct($senderId, $topic, $content, $isAnonymous) {
-        $this->senderId = $senderId;
-        $this->sentAt = date('Y-m-d H:i:s');    //current time
-        $this->topic = $topic;
-        $this->content = $content;
-        $this->isAnonymous = $isAnonymous;
-
-        $this->chainNumber = 0;
-    }*/
-
-    public function __construct($id, $senderId, $sentAt, $topic, $content, $chainNumber, $isAnonymous, $senderUsername) {
+    public function __construct($id, $senderId, $sentAt, $topic, $content, $chainNumber, $isAnonymous, $senderUsername, $isRead, $isStarred) {
         $this->id = $id;
         $this->senderId = $senderId;
         $this->sentAt = $sentAt;
@@ -28,6 +20,8 @@ class Message {
         $this->chainNumber = $chainNumber;
         $this->isAnonymous = $isAnonymous;
         $this->senderUsername = $senderUsername;
+        $this->isRead = $isRead;
+        $this->isStarred = $isStarred;
     }
 
     public function setChainNumber(int $newValue) {
@@ -76,7 +70,8 @@ class Message {
 
     public static function fromArray($data) {
         return new Message($data['id'], $data['senderId'], $data['sentAt'],
-     $data['topic'], $data['content'], $data['chainNumber'], $data['isAnonymous'], $data['senderUsername']);
+     $data['topic'], $data['content'], $data['chainNumber'], $data['isAnonymous'], $data['senderUsername'],
+    $data['isRead'], $data['isStarred']);
     }
 
     public function jsonSerialize() {
@@ -88,7 +83,9 @@ class Message {
             'content' => $this->content,
             'chainNumber' => $this->chainNumber,
             'isAnonymous' => $this->isAnonymous,
-            'senderUsername' => $this->senderUsername
+            'senderUsername' => $this->senderUsername,
+            'isRead' => $this->isRead,
+            'isStarred' => $this->isStarred,
         ];
     }
 }

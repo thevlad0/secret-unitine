@@ -114,52 +114,6 @@ class MessageRepository implements MessageRepositoryAPI {
         }
     }
 
-    public function getSentMessagesOfUser(int $userId): array {
-        try {
-            $connection = $this->db->getConnection();
-            $sql = "SELECT m.*, u.username AS senderUsername FROM messages m JOIN users AS u ON u.id = m.senderId WHERE m.senderId = ?";
-            $selectStatement = $connection->prepare($sql);
-            $selectStatement->execute([$userId]);
-            
-            $inboxData = $selectStatement->fetchAll();
-            $sentMessages = [];
-
-            foreach ($inboxData as $sentMessage) {
-                $sentMessages[] = Message::fromArray($sentMessage);
-            }
-            return $sentMessages;
-        } catch (PDOException $e) {
-            error_log(date("Y-m-d H:i:s") . " - Error occurred while getting sent messages of user with id=$userId : "
-             . $e->getMessage() . "\n", 3, __DIR__ . "../../logs/error_log.txt");
-            http_response_code(500); 
-        }
-    }
-
-    public function getInboxOfUser(int $userId): array {
-        try {
-            $connection = $this->db->getConnection();
-            $sql = "SELECT m.*, u.username AS senderUsername FROM messages m
-                JOIN users AS u ON u.id = m.senderId
-                JOIN message_recipients AS mr ON m.id = mr.messageId
-                WHERE mr.recipientId = ?";
-
-            $selectStatement = $connection->prepare($sql);
-            $selectStatement->execute([$userId]);
-            
-            $inboxData = $selectStatement->fetchAll();
-            $receivedMessages = [];
-
-            foreach ($inboxData as $receivedMessage) {
-                $receivedMessages[] = Message::fromArray($receivedMessage);
-            }
-            return $receivedMessages;
-        } catch (PDOException $e) {
-            error_log(date("Y-m-d H:i:s") . " - Error occurred while getting inbox messages of user with id=$userId : "
-             . $e->getMessage() . "\n", 3, __DIR__ . "../../logs/error_log.txt");
-            http_response_code(500);
-        }
-    }
-
     public function getMessageRecipientsIds($messageId): array {
         try {
             $connection = $this->db->getConnection();
@@ -237,7 +191,8 @@ class MessageRepository implements MessageRepositoryAPI {
         try {
             $connection = $this->db->getConnection();
             $messageFolderId = $this->getMessageFolderId($folderName);
-            $sql = "SELECT m.*, u.username AS senderUsername FROM messages m
+            $sql = "SELECT m.*, u.username AS senderUsername, ums.isRead AS isRead, ums.isStarred AS isStarred
+                FROM messages m
                 JOIN users AS u ON u.id = m.senderId
                 JOIN user_messages_status AS ums ON m.id = ums.messageId
                 WHERE ums.userId = ? AND ums.messageFolderId = ? AND ums.isStarred = 1";
@@ -263,7 +218,8 @@ class MessageRepository implements MessageRepositoryAPI {
         try {
             $connection = $this->db->getConnection();
             $messageFolderId = $this->getMessageFolderId($folderName);
-            $sql = "SELECT m.*, u.username AS senderUsername FROM messages m
+            $sql = "SELECT m.*, u.username AS senderUsername, ums.isRead AS isRead, ums.isStarred AS isStarred
+                FROM messages m
                 JOIN users AS u ON u.id = m.senderId
                 JOIN user_messages_status AS ums ON m.id = ums.messageId
                 WHERE ums.userId = ? AND ums.messageFolderId = ? AND ums.isRead = ?";
@@ -289,7 +245,8 @@ class MessageRepository implements MessageRepositoryAPI {
         try {
             $connection = $this->db->getConnection();
             $messageFolderId = $this->getMessageFolderId($folderName);
-            $sql = "SELECT m.*, u.username AS senderUsername FROM messages m
+            $sql = "SELECT m.*, u.username AS senderUsername, ums.isRead AS isRead, ums.isStarred AS isStarred
+                FROM messages m
                 JOIN users AS u ON u.id = m.senderId
                 JOIN user_messages_status AS ums ON m.id = ums.messageId
                 WHERE ums.userId = ? AND ums.messageFolderId = ? AND m.isAnonymous = ?";
@@ -316,7 +273,8 @@ class MessageRepository implements MessageRepositoryAPI {
          try {
             $connection = $this->db->getConnection();
             $messageFolderId = $this->getMessageFolderId($folderName);
-            $sql = "SELECT m.*, u.username AS senderUsername FROM messages m
+            $sql = "SELECT m.*, u.username AS senderUsername, ums.isRead AS isRead, ums.isStarred AS isStarred
+             FROM messages m
              JOIN users AS u ON u.id = m.senderId
              JOIN user_messages_status AS ums ON m.id = ums.messageId
              JOIN message_recipients AS mr ON m.id = mr.messageId
@@ -343,7 +301,8 @@ class MessageRepository implements MessageRepositoryAPI {
         try {
             $connection = $this->db->getConnection();
             $messageFolderId = $this->getMessageFolderId($folderName);
-            $sql = "SELECT m.*, u.username AS senderUsername FROM messages m
+            $sql = "SELECT m.*, u.username AS senderUsername, ums.isRead AS isRead, ums.isStarred AS isStarred
+                FROM messages m
                 JOIN users AS u ON u.id = m.senderId
                 JOIN user_messages_status AS ums ON m.id = ums.messageId
                 WHERE ums.userId = ? AND ums.messageFolderId = ? AND m.sentAt = ?";
@@ -369,7 +328,8 @@ class MessageRepository implements MessageRepositoryAPI {
         try {
             $connection = $this->db->getConnection();
             $messageFolderId = $this->getMessageFolderId($folderName);
-            $sql = "SELECT m.*, u.username AS senderUsername FROM messages m
+            $sql = "SELECT m.*, u.username AS senderUsername, ums.isRead AS isRead, ums.isStarred AS isStarred
+                FROM messages m
                 JOIN users AS u ON u.id = m.senderId
                 JOIN user_messages_status AS ums ON m.id = ums.messageId
                 WHERE ums.userId = ? AND ums.messageFolderId = ? AND m.topic = ?";
@@ -402,7 +362,8 @@ class MessageRepository implements MessageRepositoryAPI {
             $messageFolderId = $this->getMessageFolderId($folderName);
             $order = strtoupper($order);
 
-            $sql = "SELECT m.*, u.username AS senderUsername FROM messages m
+            $sql = "SELECT m.*, u.username AS senderUsername, ums.isRead AS isRead, ums.isStarred AS isStarred
+                FROM messages m
                 JOIN users AS u ON u.id = m.senderId
                 JOIN user_messages_status AS ums ON m.id = ums.messageId
                 WHERE ums.userId = ? AND ums.messageFolderId = ?

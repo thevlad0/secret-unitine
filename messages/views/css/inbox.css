@@ -443,3 +443,30 @@ body {
 .new-user-name:focus + .add-user-confirm-btn {
     border-color: var(--accent-color);
 }
+
+.icons{
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+}
+
+/*.stars {
+   background-color: yellow;
+   color:orange;
+}*/
+
+.table-messages-rows {
+    cursor: pointer;
+}
+
+.table-messages-rows:hover {
+    background-color: rgb(219, 219, 219);
+}
+/*.icon:hover {
+    background-color: rgba(0,0,0,0.1);
+}
+.icon-btn .material-symbols-outlined {
+    margin: 0;
+    font-size: 20px;
+}*/

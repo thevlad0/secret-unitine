@@ -9,14 +9,14 @@
         //$userId = $_SESSION['user']['id'];
         //!isSet($_SESSION['userID'])
 
-        $userId = 4;
+        $userId = 4;       //CHANGE
         $messageController = new MessageController();
 
         //$userSortedInboxMessages = $messageController->getInboxOfUser($userId);
 
         $userSortedInboxMessages = $messageController->sortMessagesByDate('DESC', $userId, 'Inbox');
         $inboxMessagesJson = array_map(fn($msg) => $msg->jsonSerialize(), $userSortedInboxMessages);
-        echo json_encode($inboxMessagesJson, JSON_UNESCAPED_UNICODE);
+        echo json_encode(["userId" => $userId, "messages" => $inboxMessagesJson], JSON_UNESCAPED_UNICODE);
    /* } else {
         http_response_code(400);
         echo json_encode(["message" => "Грешка при отварянето на входящата кутия!"]);

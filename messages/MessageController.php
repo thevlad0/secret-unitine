@@ -16,14 +16,6 @@ class MessageController {
         $this->messageRepository->removeMessageOfFolder($messageId, $userId, $folderName);
     }
 
-    public function getSentMessagesOfUser($userId): array {
-        return $this->messageRepository->getSentMessagesOfUser($userId);
-    }
-
-    public function getInboxOfUser($userId): array {
-        return $this->messageRepository->getInboxOfUser($userId);
-    }
-
     public function getMessageRecipientsIds($messageId): array {
         return $this->messageRepository->getMessageRecipientsIds($messageId);
     }

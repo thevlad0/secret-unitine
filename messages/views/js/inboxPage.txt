@@ -57,6 +57,9 @@
             <h1 id="main-view-title">Входящи</h1>
             <!--<p id="main-view-content">Тук ще се показват имейлите.</p> -->
             <table id="inbox-table" >
+                <thead id="inbox-table-head">
+                    <th>Тук ще се показват имейлите.</th>  <!--Is it necesserry??-->
+                </thead>
                 <tbody id="inbox-table-body"></tbody>
             </table>
 
@@ -86,6 +89,12 @@
     </div>
 
     <input type="file" id="file-input" multiple style="display: none;">
+
+    <!--<script>
+        const sessionData = {'userId': "<?php echo $_SESSION['user']['id']; ?>"};
+    </script> -->
+
+    <!--<script type="module" src="./messages/views/js/inbox.js"></script> -->
     <script type="module" src="./views/js/inbox.js"></script>
 </body>
 </html>

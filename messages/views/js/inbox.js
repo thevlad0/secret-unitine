@@ -6,95 +6,163 @@ document.addEventListener('DOMContentLoaded', () => {
 
     initializeCompose();
 
-   // initializeGroups();
+    // initializeGroups();
 
     const sidebarNav = document.querySelector('.sidebar-nav ul');
     const mainViewTitle = document.getElementById('main-view-title');
     const mainViewContent = document.getElementById('main-view-content');
 
-    function generateContent() {
-        fetch('./services/load-user-inbox.php')
-        .then(result => result.json())
-        .then(messages => {
-            const tableBody = document.getElementById('inbox-table-body');
-            messages.forEach(message => {
-                const messageRow = document.createElement("tr");
+    var userId;         //From Session or???
 
-                const messageSender = document.createElement("td");
-                messageSender.style.fontWeight = "bold";
-                messageSender.style.fontSize = "24px";
-
-                var starIcon = document.createElement("span");
-                starIcon.setAttribute("class", "material-symbols-outlined");
-                const star = document.createTextNode("star");
-                starIcon.appendChild(star);
-
-                starIcon.style.width = "24px";
-                starIcon.style.textAlign = "center";
-                starIcon.style.padding = "0px";
-
-                messageSender.appendChild(starIcon);
-
-                var sender;
-                if (message['isAnonymous']) {
-                    sender = document.createTextNode('Анонимен');
+    function changeStarredStatusOfMessage(folderName) {
+        const starParent = document.getElementById('inbox-table-body');
+        starParent.addEventListener('click', (event) => {
+            console.log(event.target.id)
+            if (event.target.id.startsWith('star-')) {
+                const starId = event.target.id;
+                const starIcon = document.getElementById(starId);
+                const numIdStart = 5;
+                const messageId = starId.substring(numIdStart);
+                var starred = true;
+                if (starIcon.style.backgroundColor === "yellow") {
+                    starred = false;
+                    starIcon.style.backgroundColor = '';
                 } else {
-                    sender = document.createTextNode(message['senderUsername']);
+                    starred = true;
+                    starIcon.style.backgroundColor = "yellow";
                 }
+                fetch('./services/star-message.php', {
+                    method: "POST",
+                    body: JSON.stringify({
+                        "isStarred": starred, "messageId": messageId,
+                        "userId": userId, "folderName": folderName
+                    }),
+                }
+                );
+            } 
+        });
 
-                messageSender.appendChild(sender);
-                messageRow.appendChild(messageSender);
-
-                const aligningDiv = document.createElement("div");
-               
-                //const messageTopic = document.createElement("td");
-                const messageTopic = document.createElement("span");
-                const topic = document.createTextNode(message['topic']);
-                messageTopic.style.fontWeight = "normal";
-                messageTopic.style.fontSize = "16px";
-                messageTopic.appendChild(topic);
-
-               aligningDiv.appendChild(messageTopic);
-               messageSender.appendChild(aligningDiv);
-
-               const messageSentAt = document.createElement("td");
-               messageSentAt.style.fontWeight = "bold";
-               const sentAt = document.createTextNode(message['sentAt']);
-               messageSentAt.appendChild(sentAt);
-               messageRow.appendChild(messageSentAt);
-
-               //messageRow.appendChild(aligningDiv);
-
-                //messageRow.appendChild(messageTopic);
-
-                console.log(message['sentAt']);
-                
-                tableBody.appendChild(messageRow);
-            });
-        })
     }
 
-   generateContent();
 
-   /*const viewContent = {
-        inbox: { title: 'Входящи', generateInbox: generateContent() },
-        sent: { title: 'Изпратени', content: 'Тук ще намерите всички изпратени съобщения.' },
-        starred: { title: 'Със звезда', content: 'Вашите важни съобщения, маркирани със звезда.' },
-        trash: { title: 'Изтрити', content: 'Съобщенията тук ще бъдат изтрити перманентно след 30 дни.' }
-    };
+    function removeMessage(folderName) {
+        const binParent = document.getElementById('inbox-table-body');
+        binParent.addEventListener('click', (event) => {
+            if (event.target.id.startsWith('bin-')) {
+                const binId = event.target.id;
+                const numIdStart = 4;
+                const messageId = binId.substring(numIdStart);
 
-    sidebarNav.addEventListener('click', (e) => {
-        const targetLi = e.target.closest('li');
-        if (!targetLi) return;
+                fetch('./services/remove-message.php', {
+                    method: "POST",
+                    body: JSON.stringify({
+                        "messageId": messageId,
+                        "userId": userId,
+                        "folderName": folderName
+                    }),
+                }
+                );
+                const elementToRemove = document.getElementById('msg-' + messageId);
+                binParent.removeChild(elementToRemove);
+                location.reload();
+            }
+        });
+    }
 
-        sidebarNav.querySelectorAll('li').forEach(li => li.classList.remove('active'));
-        targetLi.classList.add('active');
+    function generateContent(folderName) {
+        fetch('./services/load-user-inbox.php')
+            .then(result => result.json())
+            .then(result => {
+                var messages = result.messages;
+                userId = result.userId;
+                const tableBody = document.getElementById('inbox-table-body');
+                messages.forEach(message => {
+                    const messageRow = document.createElement("tr");
+                    messageRow.setAttribute("class", "table-messages-rows");
 
-        const view = targetLi.dataset.view;
-        if (view && viewContent[view]) {
-            mainViewTitle.textContent = viewContent[view].title;
-           //mainViewContent.textContent = viewContent[view].content;
-            viewContent[view].generateInbox();
-        }
-    });*/
+                    messageRow.setAttribute("id", "msg-" + message['id']);
+
+                    messageRow.dataset.json = JSON.stringify(message);
+
+                    const messageSender = document.createElement("td");
+                    messageSender.style.fontWeight = message['isRead'] ? "lighter" : "bold";
+                    messageSender.style.fontSize = "24px";
+
+                    var starIcon = document.createElement("span");
+                    starIcon.setAttribute("class", "icon-btn material-symbols-outlined stars");
+                    starIcon.setAttribute("id", "star-" + message['id']);
+
+                    const star = document.createTextNode("star");
+                    starIcon.appendChild(star);
+                    starIcon.style.backgroundColor = message['isStarred'] ? "yellow" : '';
+
+                    messageSender.appendChild(starIcon);
+
+                    var sender;
+                    if (message['isAnonymous']) {
+                        sender = document.createTextNode('Анонимен');
+                    } else {
+                        sender = document.createTextNode(message['senderUsername']);
+                    }
+
+                    messageSender.appendChild(sender);
+                    messageRow.appendChild(messageSender);
+
+                    var binIcon = document.createElement("td");
+                    binIcon.setAttribute("class", "icon-btn material-symbols-outlined bins");
+                    binIcon.setAttribute("id", "bin-" + message['id']);
+                    const bin = document.createTextNode("delete");
+                    binIcon.appendChild(bin);
+
+                    messageRow.appendChild(binIcon);
+
+                    const aligningDiv = document.createElement("div");
+
+                    const messageTopic = document.createElement("span");
+                    const topic = document.createTextNode(message['topic']);
+                    messageTopic.style.fontWeight = "normal";
+                    messageTopic.style.fontSize = "16px";
+                    messageTopic.appendChild(topic);
+
+                    aligningDiv.appendChild(messageTopic);
+                    messageSender.appendChild(aligningDiv);
+
+                    messageSender.style.width = "85%";
+
+                    const messageSentAt = document.createElement("td");
+                    messageSentAt.style.fontWeight = "bold";
+                    const sentAt = document.createTextNode(message['sentAt']);
+                    messageSentAt.appendChild(sentAt);
+                    messageRow.appendChild(messageSentAt);
+
+                    tableBody.appendChild(messageRow);
+                });
+            })
+    }
+
+    generateContent('Inbox');
+    changeStarredStatusOfMessage('Inbox');
+    removeMessage('Inbox');
+
+    /* const viewContent = {
+         inbox: { title: 'Входящи', generateInbox: generateContent('Inbox') },
+         sent: { title: 'Изпратени', content: 'Тук ще намерите всички изпратени съобщения.' },
+         starred: { title: 'Със звезда', content: 'Вашите важни съобщения, маркирани със звезда.' },
+         trash: { title: 'Изтрити', content: 'Съобщенията тук ще бъдат изтрити перманентно след 30 дни.' }
+     };
+ 
+     sidebarNav.addEventListener('click', (e) => {
+         const targetLi = e.target.closest('li');
+         if (!targetLi) return;
+ 
+         sidebarNav.querySelectorAll('li').forEach(li => li.classList.remove('active'));
+         targetLi.classList.add('active');
+ 
+         const view = targetLi.dataset.view;
+         if (view && viewContent[view]) {
+             mainViewTitle.textContent = viewContent[view].title;
+             //mainViewContent.textContent = viewContent[view].content;
+             viewContent[view].generateInbox();
+         }
+     });*/
 });
