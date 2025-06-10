@@ -443,3 +443,10 @@ body {
 .new-user-name:focus + .add-user-confirm-btn {
     border-color: var(--accent-color);
 }
+
+
+
+/*New- because of the inbuilt html*/
+#main-content-section {
+    padding: 0;
+}

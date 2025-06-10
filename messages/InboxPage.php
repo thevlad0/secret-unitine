@@ -53,7 +53,7 @@
             </div>
         </aside>
 
-        <main class="main-content">
+        <main class="main-content" id="main-content-section">
             <h1 id="main-view-title">Входящи</h1>
             <!--<p id="main-view-content">Тук ще се показват имейлите.</p> -->
             <table id="inbox-table" >

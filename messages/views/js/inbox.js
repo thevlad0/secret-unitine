@@ -19,6 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const tableBody = document.getElementById('inbox-table-body');
             messages.forEach(message => {
                 const messageRow = document.createElement("tr");
+                messageRow.setAttribute("class", "table-messages-rows");
+                messageRow.dataset.json = JSON.stringify(message);
 
                 const messageSender = document.createElement("td");
                 messageSender.style.fontWeight = "bold";
@@ -44,6 +46,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 messageSender.appendChild(sender);
                 messageRow.appendChild(messageSender);
+                
+                var binIcon = document.createElement("td");
+                binIcon.setAttribute("class", "material-symbols-outlined");
+                const bin = document.createTextNode("delete");
+                binIcon.appendChild(bin);
+
+                binIcon.style.width = "100px";
+                binIcon.style.textAlign = "left";
+                binIcon.style.padding = "0px";
+
+                messageRow.appendChild(binIcon);
 
                 const aligningDiv = document.createElement("div");
                
@@ -62,6 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
                const sentAt = document.createTextNode(message['sentAt']);
                messageSentAt.appendChild(sentAt);
                messageRow.appendChild(messageSentAt);
+              
 
                //messageRow.appendChild(aligningDiv);
 
@@ -70,13 +84,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log(message['sentAt']);
                 
                 tableBody.appendChild(messageRow);
+
+                console.log(JSON.stringify(message));
+
+                //new code
+                 messageRow.addEventListener("click", (e) => {
+                    console.log("here");
+                        fetch('services/set-message-in-session.php', {
+                         method: "POST",
+                         body: JSON.stringify(message),
+                    }).then(window.location.href = ' views/open-message.php')
+            });
+                //ends here
+
             });
         })
     }
 
-   generateContent();
+   generateContent();  
+   
 
-   /*const viewContent = {
+   const viewContent = {
         inbox: { title: 'Входящи', generateInbox: generateContent() },
         sent: { title: 'Изпратени', content: 'Тук ще намерите всички изпратени съобщения.' },
         starred: { title: 'Със звезда', content: 'Вашите важни съобщения, маркирани със звезда.' },
@@ -94,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (view && viewContent[view]) {
             mainViewTitle.textContent = viewContent[view].title;
            //mainViewContent.textContent = viewContent[view].content;
-            viewContent[view].generateInbox();
+            viewContent[view].generateInbox;
         }
-    });*/
+    });
 });
