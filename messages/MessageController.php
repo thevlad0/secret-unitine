@@ -1,5 +1,5 @@
 <?php
-require_once('./storage/messageRepository.php');
+require_once __DIR__ . '/storage/messageRepository.php';
 
 class MessageController {
     private $messageRepository;
@@ -8,9 +8,8 @@ class MessageController {
         $this->messageRepository = new MessageRepository();
     }
 
-    public function addMessage($senderId, $topic, $content, $isAnonymous, $recipientsIds) {
-        $message = new Message($senderId, $topic, $content, $isAnonymous);
-        $this->messageRepository->addMessage($message, $recipientsIds);
+    public function addMessage(int $senderId, string $sentAt, string $topic, string $content, $chainNumber, bool $isAnonymous, array $recipientsIds) {
+        $this->messageRepository->addMessage($senderId, $sentAt, $topic, $content, $chainNumber, $isAnonymous, $recipientsIds);
     }
 
     public function removeMessageOfFolder($messageId, $userId, $folderName) {
@@ -63,4 +62,6 @@ class MessageController {
         return $this->messageRepository->sortMessagesByDate($order, $userId, $folderName);
     }
 }
+   // $con = new MessageController();
+   // var_dump($con->sortMessagesByDate('ASC', 4, 'Inbox'));
 ?>

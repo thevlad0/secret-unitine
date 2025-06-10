@@ -3,7 +3,7 @@
         session_start();
     }
 
-    require_once __DIR__ . '/../../util/authenticate.php';
+    //require_once __DIR__ . '/../../util/authenticate.php';
 ?>
 
 <!DOCTYPE html>
@@ -11,8 +11,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inbox Interface</title>
-    <link rel="stylesheet" href="./messages/views/css/inbox.css">
+    <title>Inbox</title>
+    <!--<link rel="stylesheet" href="./messages/views/css/inbox.css"> -->
+    <link rel="stylesheet" href="./views/css/inbox.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
@@ -54,7 +55,14 @@
 
         <main class="main-content">
             <h1 id="main-view-title">Входящи</h1>
-            <p id="main-view-content">Тук ще се показват имейлите.</p>
+            <!--<p id="main-view-content">Тук ще се показват имейлите.</p> -->
+            <table id="inbox-table" >
+                <thead id="inbox-table-head">
+                    <th>Тук ще се показват имейлите.</th>  <!--Is it necesserry??-->
+                </thead>
+                <tbody id="inbox-table-body"></tbody>
+            </table>
+
         </main>
     </div>
 
@@ -71,7 +79,7 @@
             <textarea placeholder="Напишете вашето съобщение..."></textarea>
         </div>
         <div class="attachments-container" id="attachments-container">
-            </div>
+        </div>
         <div class="compose-window-footer">
             <button class="send-btn">Изпращане</button>
             <button type="button" class="icon-btn" id="attach-files-btn" title="Прикачи файлове">
@@ -82,12 +90,11 @@
 
     <input type="file" id="file-input" multiple style="display: none;">
 
-    <script>
-        const sessionData = {
-            'userId': "<?php echo $_SESSION['user']['id']; ?>"
-        };
-    </script>
+    <!--<script>
+        const sessionData = {'userId': "<?php echo $_SESSION['user']['id']; ?>"};
+    </script> -->
 
-    <script type="module" src="./messages/views/js/inbox.js"></script>
+    <!--<script type="module" src="./messages/views/js/inbox.js"></script> -->
+    <script type="module" src="./views/js/inbox.js"></script>
 </body>
 </html>

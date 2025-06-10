@@ -93,7 +93,7 @@ const renderGroups = (groups) => {
 };
 
 const loadGroups = async () => {
-    const result = await api.get(`${sessionData.baseURL}api/groups.php`, 'get_groups', { userId: sessionData.userId });
+    const result = await api.get('https://localhost/test/secret-unitine/api/groups.php', 'get_groups', { userId: sessionData.userId });
     if (result.status === 'success') {
         renderGroups(result.groups);
     }
@@ -114,7 +114,7 @@ export const initializeGroups = () => {
     addGroupBtn.addEventListener('click', async () => {
         const name = newGroupNameInput.value.trim();
         if (name) {
-            const result = await api.post(`${sessionData.baseURL}api/groups.php`, 'add_group', { name: name, ownerId: sessionData.userId });
+            const result = await api.post('https://localhost/test/secret-unitine/api/groups.php', 'add_group', { name: name, ownerId: sessionData.userId });
             if (result.status === 'success' && result.group) {
                 newGroupNameInput.value = '';
                 const emptyMessage = groupsListContainer.querySelector('.empty-message');
@@ -140,7 +140,7 @@ export const initializeGroups = () => {
             }
 
             searchDebounceTimeout = setTimeout(async () => {
-                const result = await api.get(`${sessionData.baseURL}api/search.php`, 'search_users', { term });
+                const result = await api.get('https://localhost/test/secret-unitine/api/search.php', 'search_users', { term });
                 resultsContainer.innerHTML = '';
                 if (result.status === 'success' && result.users.length > 0) {
                     result.users.forEach(user => {
@@ -175,7 +175,7 @@ export const initializeGroups = () => {
 
         if (e.target.closest('.delete-group-btn')) {
             if (confirm('Наистина ли искате да изтриете тази група?')) {
-                const result = await api.post(`${sessionData.baseURL}api/groups.php`, 'delete_group', { id: groupId });
+                const result = await api.post('https://localhost/test/secret-unitine/api/groups.php', 'delete_group', { id: groupId });
                 if (result.status === 'success') {
                     groupItem.remove();
                 } else {
@@ -188,7 +188,7 @@ export const initializeGroups = () => {
             const userItem = e.target.closest('.user-item');
             const userId = userItem.dataset.userId;
             if (confirm('Наистина ли искате да премахнете този потребител от групата?')) {
-                const result = await api.post(`${sessionData.baseURL}api/groups.php`, 'delete_user', { groupId: groupId, userId: userId });
+                const result = await api.post('https://localhost/test/secret-unitine/api/groups.php', 'delete_user', { groupId, userId });
                 if (result.status === 'success') {
                     userItem.remove();
                 } else {
@@ -220,7 +220,7 @@ export const initializeGroups = () => {
             const userIdToAdd = input.dataset.selectedUserId;
 
             if (userIdToAdd) {
-                const result = await api.post(`${sessionData.baseURL}api/groups.php`, 'add_user', { userId: userIdToAdd, groupId: groupId });
+                const result = await api.post('https://localhost/test/secret-unitine/api/groups.php', 'add_user', { userIdToAdd, groupId });
                 if (result.status === 'success' && result.user) {
                     appendUserToGroup(result.user, groupId);
                     input.value = '';

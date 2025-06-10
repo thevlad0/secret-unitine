@@ -2,7 +2,7 @@
 interface MessageRepositoryAPI {
     //recipientsIds sa id-tata na To: ot new message, moje i da sa id na grupi
     //@message - new message to add 
-    public function addMessage(Message $message, array $recipientsIds);
+    public function addMessage(int $senderId, string $sentAt, string $topic, string $content, $chainNumber, bool $isAnonymous, array $recipientsIds);
 
     /*
     @messageId -> id of message that must be removed
@@ -15,7 +15,7 @@ interface MessageRepositoryAPI {
     @userId -> id of current user
     Returns an array with messages
     */
-    public function getSentMessagesOfUser(int $userId): array;
+    public function getSentMessagesOfUser(int $userId): array;        //to remove!!!!
     public function getInboxOfUser(int $userId): array;
 
     public function getMessageRecipientsIds(int $messageId): array;
