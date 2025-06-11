@@ -11,6 +11,7 @@ interface MessageRepositoryAPI {
     */
     public function removeMessageOfFolder(int $messageId, int $userId, string $folderName);
 
+    public function getStarredMessagesOfUser(int $userId) : array;
     public function getMessageRecipientsIds(int $messageId): array;
      /*
     @messageId -> id of message that must be starred/read
@@ -22,7 +23,6 @@ interface MessageRepositoryAPI {
 
     public function readMessage(int $messageId, int $userId, string $folderName);
 
-    public function filterByStar(int $userId, string $folderName) : array;
     public function filterByRead(bool $isRead, int $userId, string $folderName) : array;
     public function filterByAnonimity(bool $isAnonimous, int $userId, string $folderName) : array;
     public function filterByGroup(int $groupId, int $userId, string $folderName) : array;

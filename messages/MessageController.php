@@ -16,6 +16,10 @@ class MessageController {
         $this->messageRepository->removeMessageOfFolder($messageId, $userId, $folderName);
     }
 
+    public function getStarredMessagesOfUser($userId) : array {
+        return $this->messageRepository->getStarredMessagesOfUser($userId);
+    }
+
     public function getMessageRecipientsIds($messageId): array {
         return $this->messageRepository->getMessageRecipientsIds($messageId);
     }
@@ -26,10 +30,6 @@ class MessageController {
 
     public function readMessage($messageId, $userId, $folderName) {
         $this->messageRepository->readMessage($messageId, $userId, $folderName);
-    }
-
-    public function filterByStar($userId, $folderName) : array {
-        return $this->messageRepository->filterByStar($userId, $folderName);
     }
 
     public function filterByRead($isRead, $userId, $folderName) : array {

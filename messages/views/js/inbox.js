@@ -12,8 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const mainViewTitle = document.getElementById('main-view-title');
 
     var userId;         //From Session or???
+    var folderName;
 
-    function changeStarredStatusOfMessage(folderName) {
+    function changeStarredStatusOfMessage() {
         const starParent = document.getElementById('inbox-table-body');
         starParent.addEventListener('click', (event) => {
             if (event.target.id.startsWith('star-')) {
@@ -41,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function removeMessage(folderName) {
+    function removeMessage() {
         const binParent = document.getElementById('inbox-table-body');
         binParent.addEventListener('click', (event) => {
             if (event.target.id.startsWith('bin-')) {
@@ -60,12 +61,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 );
                 const elementToRemove = document.getElementById('msg-' + messageId);
                 binParent.removeChild(elementToRemove);
-                location.reload();
             }
         });
     }
 
-    function sort(folderName) {
+    function sort() {
         const sortSelect = document.getElementById('sort-options');
         sortSelect.addEventListener('change', () => {
             const tBody = document.getElementById('inbox-table-body');
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function filter(folderName) {
+    function filter() {
         const filterSelect = document.getElementById('filter-options');
         filterSelect.addEventListener('change', () => {
             const tBody = document.getElementById('inbox-table-body');
@@ -95,13 +95,13 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(result => {
                 var messages = result.messages;
                 userId = result.userId;
+                const tableHead = document.getElementById('inbox-table-head');
+                tableHead.style.display = "initial";
                 const tableBody = document.getElementById('inbox-table-body');
                 messages.forEach(message => {
                     const messageRow = document.createElement("tr");
                     messageRow.setAttribute("class", "table-messages-rows");
-
                     messageRow.setAttribute("id", "msg-" + message['id']);
-
                     messageRow.dataset.json = JSON.stringify(message);
 
                     const messageSender = document.createElement("td");
@@ -111,11 +111,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     var starIcon = document.createElement("span");
                     starIcon.setAttribute("class", "icon-btn material-symbols-outlined stars");
                     starIcon.setAttribute("id", "star-" + message['id']);
-
                     const star = document.createTextNode("star");
                     starIcon.appendChild(star);
                     starIcon.style.backgroundColor = message['isStarred'] ? "yellow" : '';
-
                     messageSender.appendChild(starIcon);
 
                     var sender;
@@ -124,7 +122,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     } else {
                         sender = document.createTextNode(message['senderUsername']);
                     }
-
                     messageSender.appendChild(sender);
                     messageRow.appendChild(messageSender);
 
@@ -133,20 +130,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     binIcon.setAttribute("id", "bin-" + message['id']);
                     const bin = document.createTextNode("delete");
                     binIcon.appendChild(bin);
-
                     messageRow.appendChild(binIcon);
 
                     const aligningDiv = document.createElement("div");
-
                     const messageTopic = document.createElement("span");
                     const topic = document.createTextNode(message['topic']);
                     messageTopic.style.fontWeight = "normal";
                     messageTopic.style.fontSize = "16px";
                     messageTopic.appendChild(topic);
-
                     aligningDiv.appendChild(messageTopic);
                     messageSender.appendChild(aligningDiv);
-
                     messageSender.style.width = "85%";
 
                     const messageSentAt = document.createElement("td");
@@ -169,7 +162,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const view = targetLi.dataset.view;
         if (view) {
-            var folderName = 'Inbox';
             if (view === 'inbox') {
                 mainViewTitle.textContent = 'Входящи';
                 folderName = 'Inbox';
@@ -178,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 folderName = 'SentMessages';
             } else if (view === 'starred') {
                 mainViewTitle.textContent = 'Със звезда';
-                //folderName = 'Starred';                     //TO-DOOOOOO???????????????//////
+                folderName = 'Starred';
             } else if (view === 'trash') {
                 mainViewTitle.textContent = 'Изтрити';
                 folderName = 'Deleted';
@@ -186,11 +178,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const mainViewContent = document.getElementById('inbox-table-body');
             mainViewContent.innerHTML = '';
-            generateContent({'folderName': folderName});
-            changeStarredStatusOfMessage(folderName);
-            removeMessage(folderName);
-            sort(folderName);
-            filter(folderName);
+            generateContent({ 'folderName': folderName });
         }
     });
+    changeStarredStatusOfMessage();
+    removeMessage();
+    sort();
+    filter();
 });

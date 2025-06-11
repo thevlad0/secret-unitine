@@ -13,8 +13,13 @@
 
         $data = json_decode(file_get_contents('php://input'), true);
         $messageController = new MessageController();
-
-       if (isSet($data['sortBy'])) {
+        $userMessages = [];
+        if (!isSet($data['folderName'])) {
+            error_log(date("Y-m-d H:i:s") . " - Error occurred while generating content - not entered folder name: " . "\n", 3, __DIR__ . "/../../logs/error_log.txt");
+            http_response_code(500);
+            exit;
+        }
+        if (isSet($data['sortBy'])) {
             $orderBy = strcmp($data['sortBy'], 'date-ASC') === 0 ? 'ASC' : 'DESC';
             $userMessages = $messageController->sortMessagesByDate($orderBy, $userId, $data['folderName']);
         } else if (isSet($data['filterBy'])) {
@@ -27,8 +32,10 @@
             } else if (strcmp($data['filterBy'], 'unread') === 0) {
                 $userMessages = $messageController->filterByRead(false, $userId, $data['folderName']);
             }
+        } else if (strcmp($data['folderName'], 'Starred') === 0) {
+            $userMessages = $messageController->getStarredMessagesOfUser($userId);
         } else {
-             $userMessages = $messageController->sortMessagesByDate('DESC', $userId, $data['folderName']);
+            $userMessages = $messageController->sortMessagesByDate('DESC', $userId, $data['folderName']);
         }
 
         $messagesJson = array_map(fn($msg) => $msg->jsonSerialize(), $userMessages);

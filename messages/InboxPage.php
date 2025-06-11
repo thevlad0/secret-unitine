@@ -57,7 +57,7 @@
             <h1 id="main-view-title"></h1>
             <div class="main-view-content">
                 <table id="messages-table" >
-                <thead id="inbox-table-head">
+                <thead id="inbox-table-head" style="display:none">
                     <td>
                         <select name="sort-options" id="sort-options">
                             <option value="" disabled selected hidden>Сортирай по:</option>

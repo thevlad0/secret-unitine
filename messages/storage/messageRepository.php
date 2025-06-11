@@ -61,7 +61,7 @@ class MessageRepository implements MessageRepositoryAPI {
         } catch (PDOException $e) {
             $connection->rollback();
             error_log(date("Y-m-d H:i:s") . " - Error occurred while adding message: "
-             . $e->getMessage() . "\n", 3, __DIR__ . "../../logs/error_log.txt");
+             . $e->getMessage() . "\n", 3, __DIR__ . "/../../logs/error_log.txt");
             http_response_code(500);
         }
     }
@@ -109,7 +109,7 @@ class MessageRepository implements MessageRepositoryAPI {
             }
         } catch (PDOException $e) {
             error_log(date("Y-m-d H:i:s") . " - Error occurred while removing a message with id=$messageId : "
-             . $e->getMessage() . "\n", 3, __DIR__ . "../../logs/error_log.txt");
+             . $e->getMessage() . "\n", 3, __DIR__ . "/../../logs/error_log.txt");
             http_response_code(500);
         }
     }
@@ -134,7 +134,7 @@ class MessageRepository implements MessageRepositoryAPI {
             return $recipientsIds;
         } catch (PDOException $e) {
             error_log(date("Y-m-d H:i:s") . " - Error occurred while getting recipientsIds of message with id=$messageId : "
-             . $e->getMessage() . "\n", 3, __DIR__ . "../../logs/error_log.txt");
+             . $e->getMessage() . "\n", 3, __DIR__ . "/../../logs/error_log.txt");
             http_response_code(500);
         }
     }
@@ -149,7 +149,7 @@ class MessageRepository implements MessageRepositoryAPI {
         }
          catch (PDOException $e) {
             error_log(date("Y-m-d H:i:s") . " - Error occurred while starring a message with id=$messageId : "
-             . $e->getMessage() . "\n", 3, __DIR__ . "../../logs/error_log.txt");
+             . $e->getMessage() . "\n", 3, __DIR__ . "/../../logs/error_log.txt");
             http_response_code(500);
         }
     }
@@ -164,7 +164,7 @@ class MessageRepository implements MessageRepositoryAPI {
         }
          catch (PDOException $e) {
             error_log(date("Y-m-d H:i:s") . " - Error occurred while starring a message with id=$messageId : "
-             . $e->getMessage() . "\n", 3, __DIR__ . "../../logs/error_log.txt");
+             . $e->getMessage() . "\n", 3, __DIR__ . "/../../logs/error_log.txt");
             http_response_code(500);
         }
     }
@@ -182,23 +182,22 @@ class MessageRepository implements MessageRepositoryAPI {
         }
          catch (PDOException $e) {
             error_log(date("Y-m-d H:i:s") . " - Error occurred while extracting a message with id=$messageId : "
-             . $e->getMessage() . "\n", 3, __DIR__ . "../../logs/error_log.txt");
+             . $e->getMessage() . "\n", 3, __DIR__ . "/../../logs/error_log.txt");
             http_response_code(500);
         }
     }
     //end
-    public function filterByStar(int $userId, string $folderName) : array {
+    public function getStarredMessagesOfUser(int $userId) : array {
         try {
             $connection = $this->db->getConnection();
-            $messageFolderId = $this->getMessageFolderId($folderName);
             $sql = "SELECT m.*, u.username AS senderUsername, ums.isRead AS isRead, ums.isStarred AS isStarred
                 FROM messages m
                 JOIN users AS u ON u.id = m.senderId
                 JOIN user_messages_status AS ums ON m.id = ums.messageId
-                WHERE ums.userId = ? AND ums.messageFolderId = ? AND ums.isStarred = 1";
+                WHERE ums.userId = ? AND ums.isStarred = 1";
     
             $selectStatement = $connection->prepare($sql);
-            $selectStatement->execute([$userId, $messageFolderId]);
+            $selectStatement->execute([$userId]);
             
             $starredMessagesData = $selectStatement->fetchAll();
             $starredMessages = [];
@@ -209,7 +208,7 @@ class MessageRepository implements MessageRepositoryAPI {
             return $starredMessages;
         } catch (PDOException $e) {
             error_log(date("Y-m-d H:i:s") . " - Error occurred while filtering by star: " 
-            . $e->getMessage() . "\n", 3, __DIR__ . "../../logs/error_log.txt");
+            . $e->getMessage() . "\n", 3, __DIR__ . "/../../logs/error_log.txt");
             http_response_code(500);
         }
     }
@@ -236,7 +235,7 @@ class MessageRepository implements MessageRepositoryAPI {
             return $readMessages;
         } catch (PDOException $e) {
             error_log(date("Y-m-d H:i:s") . " - Error occurred while filtering by unread: " 
-            . $e->getMessage() . "\n", 3, __DIR__ . "../../logs/error_log.txt");
+            . $e->getMessage() . "\n", 3, __DIR__ . "/../../logs/error_log.txt");
             http_response_code(500);
         }
     }
@@ -263,7 +262,7 @@ class MessageRepository implements MessageRepositoryAPI {
             return $anonymousMessages;
         } catch (PDOException $e) {
             error_log(date("Y-m-d H:i:s") . " - Error occurred while filtering by anonimity: " 
-            . $e->getMessage() . "\n", 3, __DIR__ . "../../logs/error_log.txt");
+            . $e->getMessage() . "\n", 3, __DIR__ . "/../../logs/error_log.txt");
             http_response_code(500);
         }
     }
@@ -292,7 +291,7 @@ class MessageRepository implements MessageRepositoryAPI {
             return $resultMessages;
         }  catch (PDOException $e) {
             error_log(date("Y-m-d H:i:s") . " - Error occurred while filtering by group: " 
-            . $e->getMessage() . "\n", 3, __DIR__ . "../../logs/error_log.txt");
+            . $e->getMessage() . "\n", 3, __DIR__ . "/../../logs/error_log.txt");
             http_response_code(500);
         }
     }
@@ -319,7 +318,7 @@ class MessageRepository implements MessageRepositoryAPI {
             return $messagesFromDate;
         } catch (PDOException $e) {
             error_log(date("Y-m-d H:i:s") . " - Error occurred while filtering by date: " 
-            . $e->getMessage() . "\n", 3, __DIR__ . "../../logs/error_log.txt");
+            . $e->getMessage() . "\n", 3, __DIR__ . "/../../logs/error_log.txt");
             http_response_code(500);
         }
     }
@@ -346,7 +345,7 @@ class MessageRepository implements MessageRepositoryAPI {
             return $messagesByTopic;  
         } catch (PDOException $e) {
             error_log(date("Y-m-d H:i:s") . " - Error occurred while filtering by topic: " 
-            . $e->getMessage() . "\n", 3, __DIR__ . "../../logs/error_log.txt");
+            . $e->getMessage() . "\n", 3, __DIR__ . "/../../logs/error_log.txt");
             http_response_code(500);
         }
     }
@@ -380,7 +379,7 @@ class MessageRepository implements MessageRepositoryAPI {
             }
             return $sortedMessages;  
         } catch (PDOException $e) {
-            error_log(date("Y-m-d H:i:s") . " - Error occurred while sorting with order= $order ". $e->getMessage() . "\n", 3, __DIR__ . "../../logs/error_log.txt");
+            error_log(date("Y-m-d H:i:s") . " - Error occurred while sorting with order= $order ". $e->getMessage() . "\n", 3, __DIR__ . "/../../logs/error_log.txt");
             http_response_code(500);
         }
     }
@@ -411,7 +410,7 @@ class MessageRepository implements MessageRepositoryAPI {
         } catch (PDOException $e) {
             http_response_code(500);
              error_log(date("Y-m-d H:i:s") . " - Error occurred while getting messageFolderId with folderName=$folderName : "
-             . $e->getMessage() . "\n", 3, __DIR__ . "../../logs/error_log.txt");
+             . $e->getMessage() . "\n", 3, __DIR__ . "/../../logs/error_log.txt");
         }
     }
 
@@ -428,7 +427,7 @@ class MessageRepository implements MessageRepositoryAPI {
           } catch (PDOException $e) {
             http_response_code(500);
              error_log(date("Y-m-d H:i:s") . " - Error occurred while checking is valid group id: "
-             . $e->getMessage() . "\n", 3, __DIR__ . "../../logs/error_log.txt");
+             . $e->getMessage() . "\n", 3, __DIR__ . "/../../logs/error_log.txt");
         }
     }
 
@@ -449,7 +448,7 @@ class MessageRepository implements MessageRepositoryAPI {
         } catch (PDOException $e) {
             http_response_code(500);
              error_log(date("Y-m-d H:i:s") . " - Error occurred while members ids of group with groupId = $groupId : "
-             . $e->getMessage() . "\n", 3, __DIR__ . "../../logs/error_log.txt");
+             . $e->getMessage() . "\n", 3, __DIR__ . "/../../logs/error_log.txt");
         }
     }
 }
