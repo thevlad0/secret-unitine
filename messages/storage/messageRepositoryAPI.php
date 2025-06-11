@@ -25,9 +25,6 @@ interface MessageRepositoryAPI {
 
     public function filterByRead(bool $isRead, int $userId, string $folderName) : array;
     public function filterByAnonimity(bool $isAnonimous, int $userId, string $folderName) : array;
-    public function filterByGroup(int $groupId, int $userId, string $folderName) : array;
-    public function filterByDate(string $date, int $userId, string $folderName) : array;
-    public function filterByTopic(string $topic, int $userId, string $folderName) : array;
 
     public function sortMessagesByDate(string $order, int $userId, string $folderName) : array;
 }

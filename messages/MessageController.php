@@ -40,20 +40,8 @@ class MessageController {
         return $this->messageRepository->filterByAnonimity($isAnonimous, $userId, $folderName);
     }
 
-    public function filterByGroup($groupId, $userId, $folderName) : array {
-        return $this->messageRepository->filterByGroup($groupId, $userId, $folderName);
-    }
-    public function filterByDate($date, $userId, $folderName) : array {
-        return $this->messageRepository->filterByDate($date, $userId, $folderName);
-    }
-    public function filterByTopic($topic, $userId, $folderName) : array {
-        return $this->messageRepository->filterByTopic($topic, $userId, $folderName);
-    }
-
     public function sortMessagesByDate($order, $userId, $folderName) : array {
         return $this->messageRepository->sortMessagesByDate($order, $userId, $folderName);
     }
 }
-   // $con = new MessageController();
-   // var_dump($con->sortMessagesByDate('ASC', 4, 'Inbox'));
 ?>
