@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Време на генериране: 11 юни 2025 в 11:07
+-- Време на генериране: 11 юни 2025 в 17:57
 -- Версия на сървъра: 10.4.32-MariaDB
 -- Версия на PHP: 8.0.30
 
@@ -145,7 +145,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `fn`, `email`, `recoveryEmail`, `password`, `username`, `name`, `lastname`, `role`) VALUES
-(0, '', 'hrisi.hf@gmail.com', '', '$2y$10$M.XGXGHIJKaKi25OIy0dlOKJAi/yLtgYlK.P3929Mwn', 'hfrangova', 'Hrisi', 'Vasileva', 'REGLAR_USER'),
+(0, '0MI0600204', 'velinov1@uni-sofia.fmi.bg', 'velinov1@uni-sofia.fmi.bg', '$2y$10$PYT22fT3D6lXNEdZbrj7QORQHMwdOOToBPXUzjNVjOk', 'velinov1', 'Владимир', 'Великов', 'студент'),
+(1, '', 'hrisi.hf@gmail.com', '', '$2y$10$M.XGXGHIJKaKi25OIy0dlOKJAi/yLtgYlK.P3929Mwn', 'hfrangova', 'Hrisi', 'Vasileva', 'REGLAR_USER'),
 (2, '', 'stefka@gmail.com', '', '$2y$10$ETm7QdgA6CMy3oBGSOOQhOT4ayyKEAeyicbpf4CQthE', 'stefka', 'Stefka', 'Lyaskaliev', 'student'),
 (3, '', 'iliyana@gmail.com', '', '$2y$10$75AwRxkA3N2DcTr53yfYXO5NqY2/G1LxoWqxpLjt5Vg', 'iliyana', 'Iliyana', 'Frangova', 'student'),
 (4, '', 'vladi@gmail.com', '', '$2y$10$PqUkGeREkuBqG.q5MyFvgeBJrjUDBHw7kRmJMsPJ8iF', 'vlado', 'Vladi', 'NeZnam', 'teacher');
