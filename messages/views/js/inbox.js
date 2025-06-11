@@ -10,14 +10,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const sidebarNav = document.querySelector('.sidebar-nav ul');
     const mainViewTitle = document.getElementById('main-view-title');
-    const mainViewContent = document.getElementById('main-view-content');
 
     var userId;         //From Session or???
 
     function changeStarredStatusOfMessage(folderName) {
         const starParent = document.getElementById('inbox-table-body');
         starParent.addEventListener('click', (event) => {
-            console.log(event.target.id)
             if (event.target.id.startsWith('star-')) {
                 const starId = event.target.id;
                 const starIcon = document.getElementById(starId);
@@ -39,11 +37,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     }),
                 }
                 );
-            } 
+            }
         });
-
     }
-
 
     function removeMessage(folderName) {
         const binParent = document.getElementById('inbox-table-body');
@@ -69,8 +65,32 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function generateContent(folderName) {
-        fetch('./services/load-user-inbox.php')
+    function sort(folderName) {
+        const sortSelect = document.getElementById('sort-options');
+        sortSelect.addEventListener('change', () => {
+            const tBody = document.getElementById('inbox-table-body');
+            tBody.innerHTML = '';
+            generateContent({ 'folderName': folderName, 'sortBy': sortSelect.value });
+        });
+    }
+
+    function filter(folderName) {
+        const filterSelect = document.getElementById('filter-options');
+        filterSelect.addEventListener('change', () => {
+            const tBody = document.getElementById('inbox-table-body');
+            tBody.innerHTML = '';
+            generateContent({ 'folderName': folderName, 'filterBy': filterSelect.value });
+        });
+    }
+
+    function generateContent(args) {
+        fetch('./services/load-user-inbox.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(args),
+        })
             .then(result => result.json())
             .then(result => {
                 var messages = result.messages;
@@ -140,29 +160,37 @@ document.addEventListener('DOMContentLoaded', () => {
             })
     }
 
-    generateContent('Inbox');
-    changeStarredStatusOfMessage('Inbox');
-    removeMessage('Inbox');
+    sidebarNav.addEventListener('click', (e) => {
+        const targetLi = e.target.closest('li');
+        if (!targetLi) return;
 
-    /* const viewContent = {
-         inbox: { title: 'Входящи', generateInbox: generateContent('Inbox') },
-         sent: { title: 'Изпратени', content: 'Тук ще намерите всички изпратени съобщения.' },
-         starred: { title: 'Със звезда', content: 'Вашите важни съобщения, маркирани със звезда.' },
-         trash: { title: 'Изтрити', content: 'Съобщенията тук ще бъдат изтрити перманентно след 30 дни.' }
-     };
- 
-     sidebarNav.addEventListener('click', (e) => {
-         const targetLi = e.target.closest('li');
-         if (!targetLi) return;
- 
-         sidebarNav.querySelectorAll('li').forEach(li => li.classList.remove('active'));
-         targetLi.classList.add('active');
- 
-         const view = targetLi.dataset.view;
-         if (view && viewContent[view]) {
-             mainViewTitle.textContent = viewContent[view].title;
-             //mainViewContent.textContent = viewContent[view].content;
-             viewContent[view].generateInbox();
-         }
-     });*/
+        sidebarNav.querySelectorAll('li').forEach(li => li.classList.remove('active'));
+        targetLi.classList.add('active');
+
+        const view = targetLi.dataset.view;
+        if (view) {
+            var folderName = 'Inbox';
+            if (view === 'inbox') {
+                mainViewTitle.textContent = 'Входящи';
+                folderName = 'Inbox';
+            } else if (view === 'sent') {
+                mainViewTitle.textContent = 'Изпратени';
+                folderName = 'SentMessages';
+            } else if (view === 'starred') {
+                mainViewTitle.textContent = 'Със звезда';
+                //folderName = 'Starred';                     //TO-DOOOOOO???????????????//////
+            } else if (view === 'trash') {
+                mainViewTitle.textContent = 'Изтрити';
+                folderName = 'Deleted';
+            }
+
+            const mainViewContent = document.getElementById('inbox-table-body');
+            mainViewContent.innerHTML = '';
+            generateContent({'folderName': folderName});
+            changeStarredStatusOfMessage(folderName);
+            removeMessage(folderName);
+            sort(folderName);
+            filter(folderName);
+        }
+    });
 });

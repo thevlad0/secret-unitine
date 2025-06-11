@@ -54,12 +54,28 @@
         </aside>
 
         <main class="main-content">
-            <h1 id="main-view-title">Входящи</h1>
-            <!--<p id="main-view-content">Тук ще се показват имейлите.</p> -->
-            <table id="inbox-table" >
+            <h1 id="main-view-title"></h1>
+            <div class="main-view-content">
+                <table id="messages-table" >
+                <thead id="inbox-table-head">
+                    <td>
+                        <select name="sort-options" id="sort-options">
+                            <option value="" disabled selected hidden>Сортирай по:</option>
+                            <option value="date-ASC">Дата - възходящо</option>
+                            <option value="date-DESC">Дата - низходящо</option>
+                        </select>
+                        <select name="filter-options" id="filter-options">
+                            <option value="" disabled selected hidden>Филтрирай по:</option>
+                            <option value="anonymous">Анонимни</option>
+                            <option value="non-anonymous">Неанонимни</option>
+                            <option value="read">Прочетени</option>
+                            <option value="unread">Непрочетени</option>
+                        </select>
+                    </td>
+                </thead>
                 <tbody id="inbox-table-body"></tbody>
             </table>
-
+            </div>
         </main>
     </div>
 

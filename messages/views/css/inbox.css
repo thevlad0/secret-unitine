@@ -451,11 +451,6 @@ body {
     padding: 4px;
 }
 
-/*.stars {
-   background-color: yellow;
-   color:orange;
-}*/
-
 .table-messages-rows {
     cursor: pointer;
 }
@@ -463,10 +458,19 @@ body {
 .table-messages-rows:hover {
     background-color: rgb(219, 219, 219);
 }
-/*.icon:hover {
-    background-color: rgba(0,0,0,0.1);
+
+.main-view-content {
+    max-height: 500px;
+    overflow-y: auto;
+    overflow-x: auto;
+    display: block;
 }
-.icon-btn .material-symbols-outlined {
-    margin: 0;
-    font-size: 20px;
-}*/
+
+#messages-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#inbox-table-head {
+    height: 50px;
+}
