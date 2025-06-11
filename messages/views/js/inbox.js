@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 //new code
                  messageRow.addEventListener("click", (e) => {
-                    console.log("here");
+                    //console.log("here");
                         fetch('services/set-message-in-session.php', {
                          method: "POST",
                          body: JSON.stringify(message),
