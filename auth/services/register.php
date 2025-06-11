@@ -3,44 +3,36 @@
     
     require_once __DIR__ . '/../models/User.php';
     
+    const USER_DATA_FILE = __DIR__ . '/../../util/data/users.csv';
     define('PASSWORD_REGEX', '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/');
 
+    //problematic function
     function __requestUserData($username) {
-        $ch = curl_init();
+       
+        $userData = [];
 
-        $url = "../api/user_data_provider.php";   //to check if it works!!!
-
-        $postData = [
-            'username' => $username,
-        ];
-
-        $jsonData = json_encode($postData);
-
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            'Content-Type: application/json',
-            'Content-Length: ' . strlen($jsonData)
-        ]);
-        
-        // Disable SSL verification for testing purposes
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-        
-
-        $response = curl_exec($ch);
-        $result = null;
-
-        if (!curl_errno($ch)) {
-            $result = json_decode($response, true);
+        if (file_exists(USER_DATA_FILE)) {
+            if (($handle = fopen(USER_DATA_FILE, "r")) !== FALSE) {
+                while (($data = fgetcsv($handle)) !== FALSE) {
+                    if (!empty($data[0]) && $data[0] === $username) {
+                        $userData = [
+                            "username" => $data[0],
+                            "fn"       => $data[1] ?? "",
+                            "email"    => $data[2] ?? "",
+                            "name"     => $data[3] ?? "",
+                            "lastname" => $data[4] ?? "",
+                            "role"     => $data[5] ?? "",
+                        ];
+                        break;
+                    }
+                }
+                fclose($handle);
+            }
         }
 
-        curl_close($ch);
-
-        return $result;
+        return $userData;
     }
+    //end of problematic function
 
      function __validateUserData($userData) {
         $errors = [];
@@ -71,12 +63,15 @@
 
 
     function handleRegister($username, $email, $password, $confirm_password, $userStorage) {
-        if ($userStorage->exists($username)) {
+
+       if ($userStorage->exists($username)) {
             return [
                 'status' => 'error',
                 'message' => 'Потребител с това потребителско име вече съществува.'
             ];
         }
+        
+        
 
         $result = __validateUserData([
             'username' => $username,
@@ -89,14 +84,9 @@
             return $result;
         }
 
-        $result = __requestUserData($username);
-
-        if ($result['status'] === 'error') {
-            return $result;
-        }
-
-        $result = $result['data'];
-
+        $result = __requestUserData('velinov1');
+      
+//($fn, $email, $recoveryEmail, $password, $username, $name, $lastname, $role)
         $user = new User(
             $result['fn'],
             $result['email'],
