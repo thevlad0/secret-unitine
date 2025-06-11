@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title> 
+    <link rel="stylesheet" href="./css/styles.css">
+    <script src="./js/register.js" defer></script>
+</head>
+<body> 
+    <div class="login-container">
+        <form id="register-form">
+            <h2>Създаване на профил</h2>
+
+            <div class="form-group">
+                <label for="username">Потребителско име</label>
+                <input id="username" type="text" name="username" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Имейл</label>
+                <input id="email" type="email" name="email" inputmode="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Парола</label>
+                <input id="password" type="password" name="password" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="confirm-password">Потвърди паролата</label>
+                <input id="confirm-password" type="password" name="confirm-password" required>
+            </div>
+
+            
+                <div class="error-message">
+                   <!--place for errors--> 
+                </div>
+            
+
+            <button type="submit" class="login-btn">Регистрация</button>            
+
+            <div class="form-footer">
+                <p>Вече имате профил? <a href="Login.php">Вход</a></p>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
