@@ -12,13 +12,13 @@
         $password = $_POST['password'];
 
         if ($username && $password) {
-            $authController = new AuthenticationController();
+            $authController = new AuthenticationController();  //zashto pri men go podchertava, nz
 
             $result = $authController->login($username, $password);
 
             if ($result['status'] === 'success') {
                 $_SESSION['user'] = $result['user'];
-                header("Location: /" . BASE_PATH . "inbox");
+                header("Location: ../../messages/InboxPage.php");  //kum stranicata na stefka
                 exit();
             } else {
                 $error = $result['message'];
@@ -32,9 +32,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <base href="<?php echo BASE_URL; ?>">
+  
     <title>Вход в системата</title>
-    <link rel="stylesheet" href="auth/views/css/styles.css">
+    <link rel="stylesheet" href="./css/styles.css">
 </head>
 <body>
 
@@ -59,7 +59,7 @@
             <button type="submit" class="login-btn">Вход</button>
 
             <div class="form-footer">
-                <p>Нямате профил? <a href="register">Регистрация</a></p>
+                <p>Нямате профил? <a href="Register.php">Регистрация</a></p>
                 <a href="forgotten-password">Забравена парола?</a>
             </div>
         </form>

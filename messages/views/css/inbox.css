@@ -474,3 +474,8 @@ body {
 #inbox-table-head {
     height: 50px;
 }
+
+/*New- because of the inbuilt html*/
+#main-content-section {
+    padding: 0;
+}

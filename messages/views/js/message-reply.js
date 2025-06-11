@@ -1,6 +1,6 @@
-//1. To do: add chained messages visualization!!!
-//function for reading message content from DB needed!!!
-const replyTitle = "Отговор";
+
+
+const replyTitle1 = "Отговор";
 const replyToAllTitle = "Отговор до всички";
 const forwardTitle = "Препращане";
 
@@ -24,7 +24,7 @@ function showReplyMessageForm(formTitle) {
    replyMessageContainer.style.display = 'block';  
    const recipientsTitle = document.getElementById('recipients-title');
    
-   if (formTitle==replyTitle || formTitle==replyToAllTitle) {
+   if (formTitle==replyTitle1 || formTitle==replyToAllTitle) {
      const recipients = document.getElementById('message-sender').textContent;
      recipientsTitle.value = recipients;
      //2. TO DO!!!
@@ -40,7 +40,7 @@ function showReplyMessageForm(formTitle) {
   }
 }
 
-replyButton.addEventListener('click', () => showReplyMessageForm(replyTitle));
+replyButton.addEventListener('click', () => showReplyMessageForm(replyTitle1));
 replyToAllButton.addEventListener('click', ()=> showReplyMessageForm(replyToAllTitle));
 forwardButton.addEventListener('click', ()=> showReplyMessageForm(forwardTitle));
 

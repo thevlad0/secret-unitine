@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const sidebarNav = document.querySelector('.sidebar-nav ul');
     const mainViewTitle = document.getElementById('main-view-title');
 
+
     var userId;         //From Session or???
     var folderName;
 
@@ -149,6 +150,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     messageRow.appendChild(messageSentAt);
 
                     tableBody.appendChild(messageRow);
+
+                    messageRow.addEventListener("click", (e) => {
+                        fetch('services/set-message-in-session.php', {
+                         method: "POST",
+                         body: JSON.stringify(message),
+                    }).then(window.location.href = ' views/open-message.php')
+            });
                 });
             })
     }

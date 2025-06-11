@@ -9,7 +9,7 @@
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $username = $_POST['username'];
-        $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+        $email =  $_POST['email'];
         $password = $_POST['password'];
         $confirmPassword = $_POST['confirm-password'];
 
@@ -20,7 +20,7 @@
 
             if ($result['status'] === 'success') {
                 $_SESSION['user'] = $result['user'];
-                header("Location: /" . BASE_PATH . "inbox");
+                header("Location: ../../messages/InboxPage.php"); 
                 exit();
             } else {
                 $errors = $result['message'];
@@ -34,9 +34,8 @@
 <head> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <base href="<?php echo BASE_URL; ?>">
     <title>Регистрация</title> 
-    <link rel="stylesheet" href="auth/views/css/styles.css">
+    <link rel="stylesheet" href="./css/styles.css">
 </head>
 <body> 
     <div class="login-container">
@@ -80,7 +79,7 @@
             <button type="submit" class="login-btn">Регистрация</button>            
 
             <div class="form-footer">
-                <p>Вече имате профил? <a href="login">Вход</a></p>
+                <p>Вече имате профил? <a href="Login.php">Вход</a></p>
             </div>
         </form>
     </div>

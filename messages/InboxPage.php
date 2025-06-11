@@ -52,8 +52,7 @@
                 </div>
             </div>
         </aside>
-
-        <main class="main-content">
+        <main class="main-content" id="main-content-section">
             <h1 id="main-view-title"></h1>
             <div class="main-view-content">
                 <table id="messages-table" >
